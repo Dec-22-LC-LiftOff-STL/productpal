@@ -15,22 +15,22 @@
     </div>
 
     <div class="form-group">
-        <label th:for="employer">Employer</label>
+        <label th:for="employer">Categories</label>
         <select name="employerId">
             <option th:each="employer : ${employers}"
                     th:text="${employer.name}"
                     th:value="${employer.id}"></option>
         </select>
-        <a th:href="@{'/employers/add'}">Add Description</a>
+        <a th:href="@{'/employers/add'}">Add Category</a>
     </div>
 
     <div class="form-group">
-        <label th:for="skills">Categories</label>
+        <label th:for="skills">Description</label>
         <th:block th:each="skill : ${skills}">
             <input type="checkbox" name="skills" th:value="${skill.id}">
             <label th:text="${skill.name}"></label>
         </th:block>
-        <a th:href="@{'/skills/add'}">Add Category</a>
+        <a th:href="@{'/skills/add'}">Add Description</a>
     </div>
 
     <input type="submit" value="Add Product" />
