@@ -1,8 +1,12 @@
-# productpal is going to based on this SpringBoot App!
-# For Team ProductPal: You can get yourself going with this starter code by
+# ProductPal is going to based on this SpringBoot App!
+
+## For Team ProductPal: You can get yourself going with this starter code by
 forking then cloning a repostiory to your local machine and setting up the neccessary applicatons properties shown in the README screenshots from the example app.
-Whenever we all make modifications to the code on our own machines, we can make Pull Requests to this repo so that LaunchCode can track our progress!
-Of course, we will all make decisions on the components solo work will be condudcted on to avoid any weird commit and push issues. I made a few small changes to make our app show 'ProductPal' and some of the base features we have dicussed. 
+
+**Whenever we all make modifications to the code on our own machines, we can make Pull Requests to this repo so that LaunchCode can track our progress!**
+
+Of course, we will all make decisions on the components solo work will be conducted on to avoid any weird commit and push issues. I made a few small changes to make our app show 'ProductPal' and some of the base features we have dicussed. 
+
 It will all likely be changed so feel free to play around with the CSS in some places or take on whatever you feel ,as long as we are all in the loop and it will not affect someone else and their progress. 
 
 
