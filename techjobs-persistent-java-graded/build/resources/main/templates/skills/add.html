@@ -8,18 +8,18 @@
 
 <form method="post" style="max-width:600px;">
     <div class="form-group">
-        <label th:for="name">Skill Name</label>
+        <label th:for="name">Description </label>
         <input class="form-control" th:field="${skill.name}" />
         <span th:errors="${skill.name}" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label th:for="description">Skill Description</label>
+        <label th:for="description">Notes</label>
         <input class="form-control" th:field="${skill.description}" />
         <span th:errors="${skill.description}" class="error"></span>
     </div>
 
-    <input type="submit" value="Add Skill" />
+    <input type="submit" value="Add Description" />
 </form>
 
 </body>

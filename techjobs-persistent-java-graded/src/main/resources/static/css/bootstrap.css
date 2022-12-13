@@ -240,6 +240,7 @@ th {
   }
   .navbar {
     display: none;
+
   }
   .btn > .caret,
   .dropup > .btn > .caret {
@@ -1411,6 +1412,7 @@ a.bg-danger:focus {
   padding-bottom: 9px;
   margin: 40px 0 20px;
   border-bottom: 1px solid #eee;
+
 }
 ul,
 ol {
@@ -4265,6 +4267,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .navbar-fixed-top {
   top: 0;
   border-width: 0 0 1px;
+
 }
 .navbar-fixed-bottom {
   bottom: 0;
