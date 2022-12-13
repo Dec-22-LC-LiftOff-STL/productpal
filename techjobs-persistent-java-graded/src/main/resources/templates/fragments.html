@@ -8,7 +8,7 @@
     <link th:href="@{/css/techjobs.css}" rel="stylesheet" />
     <script type="text/javascript" th:src="@{/js/bootstrap.js}"></script>
 
-    <title th:text="'TechJobs' + ${title == null ? '' : ' :: ' + title}">TechJobs</title>
+    <title th:text="'ProductPal' + ${title == null ? '' : ' :: ' + title}">ProductPal</title>
 </head>
 
 <body>
@@ -16,13 +16,13 @@
 <div th:fragment="page-header" class="navbar navbar-inverse navbar-fixed-top">
     <div class="container">
         <div class="navbar-header">
-            <a th:href="@{/}" class="navbar-brand">TechJobs</a>
+            <a th:href="@{/}" class="navbar-brand">ProductPal</a>
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a th:href="@{/list}">List</a></li>
+                <li><a th:href="@{/list}">List Products </a></li>
                 <li><a th:href="@{/search}">Search</a></li>
-                <li><a th:href="@{/add}">Add Jobs</a></li>
+                <li><a th:href="@{/add}">Add Products</a></li>
             </ul>
         </div>
     </div>
