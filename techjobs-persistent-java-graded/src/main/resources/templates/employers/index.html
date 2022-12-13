@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${employers} and ${employers.size()}">no jobs!</p>
+
+<div class="container body-content">
+    <h2>Employers</h2>
+    <ul>
+        <li th:each="employer : ${employers}">
+            <a th:href="@{'/employers/view/' + ${employer.id}}" th:text="${employer.name}"></a>
+        </li>
+    </ul>
+    <a th:href="@{'/employers/add'}">Add Employers</a>
+
+</div>
+
+</body>
+</html>

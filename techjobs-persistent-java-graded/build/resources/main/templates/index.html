@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body>
+
+<div th:replace="fragments :: page-header"></div>
+
+<div class="container body-content">
+    <h2>TechJobs</h2>
+    <ul>
+        <li th:each="job : ${jobs}">
+            <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>
+        </li>
+    </ul>
+
+</div>
+
+</body>
+</html>
