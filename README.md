@@ -31,8 +31,11 @@ Just unmark and add your information.
 
 To run the project, clone or download it.
 
-git clone https://github.com/AndrewGrantt/TechJobs-Persistent-SpringBoot-App.git
+---
 
+git clone https://github.com/Dec-22-LC-LiftOff-STL/productpal.git
+
+---
 Then you will import the program into your IDE and use bootRun to start the Gradle app. 
 
 <img width="312" alt="start app" src="https://user-images.githubusercontent.com/108322842/205528596-02e915ee-f759-42d0-be7c-280104d18eee.png">
