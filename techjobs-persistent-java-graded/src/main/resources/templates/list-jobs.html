@@ -19,11 +19,11 @@
                 </p>
                 <p th:text="${'Name: ' + job.name}"></p>
                 <p>
-                    Description:
+                    Category:
                     <a th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></a>
                 </p>
                 <p>
-                    Category:
+                    Description:
                     <ul th:each="skill : ${job.skills}">
                         <li>
                             <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
