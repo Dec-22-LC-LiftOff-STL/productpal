@@ -12,6 +12,7 @@ private Employer employer;
     @ManyToMany
     private List<Skill> skills= new ArrayList<>();
 
+    private int amount;
 
     public Job() {
     }
@@ -38,4 +39,8 @@ private Employer employer;
     public void setSkills(List<Skill> skills) {
         this.skills = skills;
     }
+
+    public int getAmount() { return amount; }
+
+    public void setAmount(int amount) { this.amount = amount; }
 }
