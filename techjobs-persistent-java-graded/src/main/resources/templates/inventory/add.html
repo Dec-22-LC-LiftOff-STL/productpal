@@ -12,14 +12,15 @@
 
       <form method="post" style="max-width:600px;">
       <div class="form-group">
-         <label th:for="name">Product Id:
-            <p th:text="${job.id}"></p>
+         <label th:for="jobID">Product Id:
+            <p th:name="jobID" th:text="${job.id}"></p>
             <span th:errors="${job.id}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
          <label th:for="name">Product Name:
-            <select name="jobId">
+            <select th:name="name">
+               <option th:value="0" disabled selected hidden>Choose a product!</option>
                <option th:each="job : ${jobs}"
                     th:text="${job.name}"
                     th:value="${job.id}"></option>
@@ -27,31 +28,33 @@
          </label>
       </div>
       <div class="form-group">
-         <label th:for="name">Category:
-            <p th:text="${job.employer.name}"></p>
+         <label th:for="employer">Category:
+            <p th:name="employer" th:if="${job.employer}" th:text="${job.employer.name}" >No Category Assigned!</p>
             <span th:errors="${job.employer.name}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
-         <label th:for="name">Amount:
-            <input class="form-control" th:field="${job.amount}" />
+         <label th:for="amount">Amount:
+            <input class="form-control" th:name="amount" th:field="${job.amount}" />
             <span th:errors="${job.amount}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
-         <label th:for="name">Low Threshold:
-            <input class="form-control" th:field="${thresholds.lowThreshold}" />
+         <label th:for="lowThreshold">Low Threshold:
+            <input class="form-control" th:field="${thresholds.lowThreshold}"
+                   th:name="lowThreshold" />
             <span th:errors="${thresholds.lowThreshold}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
-         <label th:for="name">High Threshold:
-            <input class="form-control" th:field="${thresholds.highThreshold}" />
+         <label th:for="highThreshold">High Threshold:
+            <input class="form-control" th:field="${thresholds.highThreshold}"
+                  th:name="highThreshold"/>
             <span th:errors="${thresholds.highThreshold}" class="error"></span>
          </label>
       </div>
       <input type="submit" value="Update Inventory" />
-   </form>
-      </div>
+     </form>
+    </div>
   </body>
 </html>
