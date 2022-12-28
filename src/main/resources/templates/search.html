@@ -1,0 +1,69 @@
+
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+
+<div>
+
+    <h1 th:text="${#strings.capitalizeWords(title)}"></h1>
+
+    <form th:action="@{/search/results}" method = "post">
+        <h2>Search by:</h2>
+
+        <p>
+            <span th:each="column : ${columns}">
+                <input
+                        type="radio"
+                        name="searchType"
+                        th:id="${column.key}"
+                        th:value="${column.key}"
+                        th:checked="${column.key == 'all'}"/>
+                <label th:for="${column.key}" th:text="${column.value}"></label>
+            </span>
+
+        </p>
+
+        <p>
+            <label for="searchTerm">Keyword:</label>
+            <input type="text" name="searchTerm" id="searchTerm" />
+        </p>
+
+        <input type="submit" value="Search" />
+    </form>
+
+    <hr />
+
+
+    <table class="product-listing">
+        <tr th:each="product : ${products}">
+            <td>
+                <p>
+                    Product Id:
+                    <a th:href="@{'/view/' + ${product.id}}" th:text="${product.id}"></a>
+                </p>
+                <p th:text="${'Name: ' + product.name}"></p>
+                <p>
+                    Category:
+                    <a th:href="@{'/view/' + ${product.category.id}}" th:text="${product.category.name}"></a>
+                </p>
+                <p>
+                    Description:
+                <ul th:each="description : ${product.description}">
+                    <li>
+                        <a th:href="@{'/description/view/' + ${description.id}}" th:text="${description.name}"></a>
+                    </li>
+                </ul>
+                </p>
+
+            </td>
+        </tr>
+    </table>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container  body-content">
+<h1 th:text="${'Product: ' + product.name}">Default Title</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<div class="product-listing">
+    <p th:text="${'ID: ' + product.id}"></p>
+    <p th:text="${'Name: ' + product.name}"></p>
+    <p>
+        Category: <a th:href="@{'/categories/view/' + ${product.category.id}}" th:text="${product.categories.name}"></a>
+    </p>
+    <p> Description:
+    <ul>
+        <li th:each="skill : ${product.description}">
+            <a th:href="@{'/description/view/' + ${description.id}}" th:text="${description.name}"></a>
+        </li>
+    </ul>
+    </p>
+</div>
+
+</body>
+</html>
+

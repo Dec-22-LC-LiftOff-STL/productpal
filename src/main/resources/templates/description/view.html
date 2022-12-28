@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container body-content">
+<h1 th:text="${'Description: ' + description.name}">Descriptions</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<div class="product-listing">
+    <p th:text="${'Description: ' + description.name}"></p>
+    <p> Common Descriptions:
+    <ul>
+        <li th:each="product : ${description.products}">
+            <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
+        </li>
+    </ul>
+    </p>
+</div>

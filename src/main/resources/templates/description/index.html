@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head">
+</head>
+<body class="container body-content">
+
+<div th:replace="fragments :: page-header"></div>
+
+<p th:unless="${description} and ${description.size()}">no Products yet Pal!</p>
+
+<div class="container body-content">
+    <h2>Descriptions</h2>
+    <ul>
+        <li th:each="description : ${description}">
+            <a th:href="@{'/description/view/' + ${description.id}}" th:text="${description.name}"></a>
+        </li>
+    </ul>
+    <a th:href="@{'/description/add'}">Add Description</a>
+
+</div>
+
+</body>
+</html>
