@@ -1,5 +1,6 @@
 package org.launchcode.techjobs.persistent.controllers;
 
+import org.launchcode.techjobs.persistent.models.Employer;
 import org.launchcode.techjobs.persistent.models.Job;
 import org.launchcode.techjobs.persistent.models.Thresholds;
 import org.launchcode.techjobs.persistent.models.data.ThresholdsRepository;
@@ -11,6 +12,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Optional;
 
 
 @Controller
@@ -46,7 +48,19 @@ public class ThresholdsController {
         if (errors.hasErrors()) {
             return "inventory/add";
         }
-        thresholdsRepository.save(newThresholds);
+
+        Optional optJob = jobRepository.findById(jobID);
+        if (optJob.isPresent()) {
+            Job job = (Job) optJob.get();
+            model.addAttribute("job", job);
+            model.addAttribute("employer", job.getEmployer().getName());
+            model.addAttribute("jobID", job.getId());
+            model.addAttribute("amount", job.getAmount());
+
+            newThresholds.setJob(job);
+
+            thresholdsRepository.save(newThresholds);
+        }
         return "redirect:";
     }
 

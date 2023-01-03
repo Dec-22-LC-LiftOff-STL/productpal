@@ -3,6 +3,13 @@
    <head th:replace="fragments :: head">
    </head>
    <body>
+<!--      <script>-->
+<!--      function updateFields(Job job){-->
+<!--        document.getElementByName("jobID").innerHTML = job.id;-->
+<!--        document.getElementByName("employer").innerHTML = job.employer.name;-->
+<!--        document.getElementByName("amount").innerHTML = job.amount;-->
+<!--      }-->
+<!--      </script>-->
 
       <div th:replace="fragments :: page-header"></div>
 
@@ -13,32 +20,52 @@
       <form method="post" style="max-width:600px;">
       <div class="form-group">
          <label th:for="jobID">Product Id:
-            <p th:name="jobID" th:text="${job.id}"></p>
+            <p th:name="jobID" th:text="${job.id}" th:id="jobID"></p>
             <span th:errors="${job.id}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
          <label th:for="name">Product Name:
-            <select th:name="name">
+            <select th:name="name" required id="name">
                <option th:value="0" disabled selected hidden>Choose a product!</option>
                <option th:each="job : ${jobs}"
                     th:text="${job.name}"
-                    th:value="${job.id}"></option>
+                    th:value="${job.id}">
+               </option>
             </select>
          </label>
       </div>
       <div class="form-group">
          <label th:for="employer">Category:
-            <p th:name="employer" th:if="${job.employer}" th:text="${job.employer.name}" >No Category Assigned!</p>
+            <p th:name="employer" th:text="${job?.employer?.name}" th:id="employer">No Category Assigned!</p>
             <span th:errors="${job.employer.name}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
          <label th:for="amount">Amount:
-            <input class="form-control" th:name="amount" th:field="${job.amount}" />
+            <input class="form-control" th:name="amount" th:field="${job.amount}" th:id="amount"/>
             <span th:errors="${job.amount}" class="error"></span>
          </label>
       </div>
+          <script>
+                let dropdown = document.getElementById("name");
+                dropdown.addEventListener("change", function (event) {
+                window.alert(event.type);
+                document.getElementById("jobID").innerHTML = dropdown.value;
+<!--                getJobData(dropdown.value);-->
+<!--                document.getElementById("employer").innerHTML = dropdown.value;-->
+<!--                document.getElementById("amount").innerHTML = dropdown.value;-->
+                });
+
+<!--                function getJobData(value){-->
+<!--                 Optional optJob = jobRepository.findById(value);-->
+<!--                   if (optJob.isPresent()) {-->
+<!--                    Job job = (Job) optJob.get();-->
+<!--                    document.getElementById("employer").innerHTML = job.employer.name;-->
+<!--                    document.getElementById("amount").innerHTML = job.amount;-->
+<!--                    }-->
+<!--                 }-->
+          </script>
       <div class="form-group">
          <label th:for="lowThreshold">Low Threshold:
             <input class="form-control" th:field="${thresholds.lowThreshold}"

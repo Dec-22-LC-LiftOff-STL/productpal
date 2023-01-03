@@ -2,6 +2,7 @@ package org.launchcode.techjobs.persistent.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Thresholds {
@@ -11,8 +12,9 @@ public class Thresholds {
     private int id;
 
     //This is the placeholder for the product
-    @NotBlank
+    @NotNull
     @OneToOne
+    @JoinColumn(name = "job_id")
     private Job job;
     private int lowThreshold;
 
@@ -26,6 +28,7 @@ public class Thresholds {
     }
 
     public Thresholds(Job job, int lowThreshold, int highThreshold) {
+        this();
         this.job = job;
         this.lowThreshold = lowThreshold;
         this.highThreshold = highThreshold;
@@ -74,4 +77,5 @@ public class Thresholds {
     public void setJob(Job job) {
         this.job = job;
     }
+
 }
