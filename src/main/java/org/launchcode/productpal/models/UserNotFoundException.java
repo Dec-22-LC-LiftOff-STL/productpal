@@ -1,6 +1,6 @@
-package org.launchcode.productpal.controllers;
+package org.launchcode.productpal.models;
 
-public class UserNotFoundException extends Throwable {
+public class  UserNotFoundException extends Throwable {
 
     public UserNotFoundException(String message) {
         super(message);

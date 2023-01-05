@@ -20,6 +20,12 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.slf4j:slf4j-api'
+	implementation 'com.sun.mail:jakarta.mail'
+	implementation 'com.sun.activation:jakarta.activation'
+	implementation 'jakarta.xml.bind:jakarta.xml.bind-api'
+	implementation 'jakarta.annotation:jakarta.annotation-api'
+	implementation 'org.springframework:spring-context-support:3.2.8.RELEASE'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
@@ -31,6 +37,8 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 }
+
+
 
 test {
 	useJUnitPlatform()

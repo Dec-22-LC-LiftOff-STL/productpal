@@ -1,10 +1,12 @@
 package org.launchcode.productpal.controllers;
 
+import org.launchcode.productpal.models.UserNotFoundException;
 import org.launchcode.productpal.models.User;
 import org.launchcode.productpal.models.data.UserRepository;
 import org.launchcode.productpal.models.dto.LoginFormDTO;
 import org.launchcode.productpal.models.dto.RegisterFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -85,7 +87,7 @@ public class AuthenticationController {
         }
         // If none of the above conditions are met:
         //Create a new user with the form data,
-        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getPassword());
+        User newUser = new User(registerFormDTO.getUsername(), registerFormDTO.getEmail(), registerFormDTO.getPassword());
         //Save the user to the database,
         userRepository.save(newUser);
         //Create a new user session,
@@ -144,6 +146,29 @@ public class AuthenticationController {
         request.getSession().invalidate();
         // Redirect the user to the login form
         return "redirect:/login";
+    }
+
+    public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
+        User user = userRepository.findByEmail(email);
+        if (user != null) {
+            user.setResetPasswordToken(token);
+            userRepository.save(user);
+        } else {
+            throw new UserNotFoundException("Could not find any user with the email " + email);
+        }
+    }
+
+    public User getByResetPasswordToken(String token) {
+        return userRepository.findByResetPasswordToken(token);
+    }
+
+    public void updatePassword(User user, String newPassword) {
+        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+        String encodedPassword = passwordEncoder.encode(newPassword);
+        user.setPwHash(encodedPassword);
+
+        user.setResetPasswordToken(null);
+        userRepository.save(user);
     }
 
 }

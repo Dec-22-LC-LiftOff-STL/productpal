@@ -32,4 +32,5 @@ public class LoginFormDTO {
         this.password = password;
     }
 
+
 }
