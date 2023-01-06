@@ -88,7 +88,7 @@ public class ForgotPasswordController {
                 + "or you have not made the request.</p>";
 
         SimpleMailMessage message = new SimpleMailMessage();
-            message.setFrom("product.pal@outlook.com");
+            message.setFrom("product.pal@zohomail.com");
             message.setTo(to);
             message.setSubject(subject);
             message.setText(content);

@@ -18,10 +18,10 @@ public class ProductpalApplication {
 	@Bean
 	public JavaMailSender getJavaMailSender() {
 		JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
-		mailSender.setHost("smtp.gmail.com");
+		mailSender.setHost("smtp.zoho.com");
 		mailSender.setPort(587);
-		mailSender.setUsername("launchcode.productpal@gmail.com");
-		mailSender.setPassword("!inventory!");
+		mailSender.setUsername("product.pal@zohomail.com");
+		mailSender.setPassword("8RxVVpW3g7EC");
 		Properties props = mailSender.getJavaMailProperties();
 		props.put("mail.transport.protocol", "smtp");
 		props.put("mail.smtp.auth", "true");
