@@ -9,6 +9,7 @@ import org.launchcode.productpal.models.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.repository.query.Param;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
@@ -65,33 +66,35 @@ public class ForgotPasswordController {
     }
 
 
-    public void sendEmail(String email, String link)
+    public void sendEmail(String to, String subject)
             throws MessagingException, UnsupportedEncodingException {
-        MimeMessage message = mailSender.createMimeMessage();
-        MimeMessageHelper helper = new MimeMessageHelper(message);
-        Properties properties = new Properties();
-        properties.put("mail.smtp.auth", "true");
-        properties.put("mail.smtp.starttls.enable", "true");
-        properties.put("mail.smtp.host", "smtp-mail.outlook.com");
-        properties.put("mail.smtp.port", "587");
-
-
-        helper.setFrom("product.pal@outlook.com", "Product Pal Support");
-        helper.setTo(email);
-
-        String subject = "Here's the link to reset your password";
-
-        String content = "<p>Hello,</p>"
+//        MimeMessage message = mailSender.createMimeMessage();
+//        MimeMessageHelper helper = new MimeMessageHelper(message);
+//        Properties properties = new Properties();
+//        properties.put("mail.smtp.auth", "true");
+//        properties.put("mail.smtp.starttls.enable", "true");
+//        properties.put("mail.smtp.host", "smtp-mail.outlook.com");
+//        properties.put("mail.smtp.port", "587");
+//
+//
+//        helper.setFrom("product.pal@outlook.com", "Product Pal Support");
+//        helper.setTo(email);
+            String content = "<p>Hello,</p>"
                 + "<p>You have requested to reset your password.</p>"
                 + "<p>Click the link below to change your password:</p>"
-                + "<p><a href=\"" + link + "\">Change my password</a></p>"
+//                + "<p><a href=\"" + link + "\">Change my password</a></p>"
                 + "<br>"
                 + "<p>Ignore this email if you do remember your password, "
                 + "or you have not made the request.</p>";
 
-        helper.setSubject(subject);
+        SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom("product.pal@outlook.com");
+            message.setTo(to);
+            message.setSubject(subject);
+            message.setText(content);
+            mailSender.send(message);
 
-        helper.setText(content, true);
+
 
 
         mailSender.send(message);
