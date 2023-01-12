@@ -6,6 +6,7 @@ import org.launchcode.productpal.models.UserNotFoundException;
 import org.launchcode.productpal.models.UserServices;
 import org.launchcode.productpal.models.Utility;
 import org.launchcode.productpal.models.data.ProductRepository;
+import org.launchcode.productpal.models.dto.ResetFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.repository.query.Param;
@@ -15,11 +16,13 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import javax.validation.constraints.Email;
 import java.io.UnsupportedEncodingException;
 import java.util.Properties;
@@ -27,6 +30,7 @@ import java.util.Properties;
 
 @Controller
 public class ForgotPasswordController {
+
     @Autowired
     private JavaMailSender mailSender;
 
@@ -53,7 +57,7 @@ public class ForgotPasswordController {
             userService.updateResetPasswordToken(token, email);
             String resetPasswordLink = Utility.getSiteURL(request) + "/reset_password?token=" + token;
             System.out.println(resetPasswordLink);
-            sendEmail(email, resetPasswordLink);
+            sendEmail(email, "Your Password Reset Link", resetPasswordLink);
 
             model.addAttribute("message", "We have sent a reset password link to your email. Please check.");
         } catch (UserNotFoundException ex) {
@@ -66,26 +70,13 @@ public class ForgotPasswordController {
     }
 
 
-    public void sendEmail(String to, String subject)
+    public void sendEmail(String to, String subject, String link)
             throws MessagingException, UnsupportedEncodingException {
-//        MimeMessage message = mailSender.createMimeMessage();
-//        MimeMessageHelper helper = new MimeMessageHelper(message);
-//        Properties properties = new Properties();
-//        properties.put("mail.smtp.auth", "true");
-//        properties.put("mail.smtp.starttls.enable", "true");
-//        properties.put("mail.smtp.host", "smtp-mail.outlook.com");
-//        properties.put("mail.smtp.port", "587");
-//
-//
-//        helper.setFrom("product.pal@outlook.com", "Product Pal Support");
-//        helper.setTo(email);
-            String content = "<p>Hello,</p>"
-                + "<p>You have requested to reset your password.</p>"
-                + "<p>Click the link below to change your password:</p>"
-//                + "<p><a href=\"" + link + "\">Change my password</a></p>"
-                + "<br>"
-                + "<p>Ignore this email if you do remember your password, "
-                + "or you have not made the request.</p>";
+
+            String content = "Hello, "
+                + "You have requested to reset your Product Pal password."
+                + "Click the link to change your password: "
+                + link;
 
         SimpleMailMessage message = new SimpleMailMessage();
             message.setFrom("product.pal@zohomail.com");
@@ -93,16 +84,11 @@ public class ForgotPasswordController {
             message.setSubject(subject);
             message.setText(content);
             mailSender.send(message);
-
-
-
-
-        mailSender.send(message);
     }
 
     @GetMapping("/reset_password")
     public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
-        User user = userService.get(token);
+        User user = userService.getByResetPasswordToken(token);
         model.addAttribute("token", token);
 
         if (user == null) {
@@ -117,8 +103,8 @@ public class ForgotPasswordController {
     public String processResetPassword(HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException {
         String token = request.getParameter("token");
         String password = request.getParameter("password");
+        User user = userService.getByResetPasswordToken(token);
 
-        User user = userService.get(token);
         model.addAttribute("title", "Reset your password");
 
         if (user == null) {
@@ -126,12 +112,10 @@ public class ForgotPasswordController {
             return "message";
         } else {
             userService.updatePassword(user, password);
-
             model.addAttribute("message", "You have successfully changed your password.");
         }
 
         return "message";
     }
-
 
 }

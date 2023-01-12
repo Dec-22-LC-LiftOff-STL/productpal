@@ -26,18 +26,19 @@ public class UserServices {
         }
     }
 
-    public User get(String resetPasswordToken) {
-        return userRepo.findByResetPasswordToken(resetPasswordToken);
-    }
+    public User getByResetPasswordToken(String token) {
+        User user = userRepo.findByResetPasswordToken(token);
+        userRepo.save(user);
+        return user;
+        }
 
-    public void updatePassword(User user, String newPassword) throws MessagingException, UnsupportedEncodingException {
+    @Transactional
+    public void updatePassword(User user, String newPassword) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         String encodedPassword = passwordEncoder.encode(newPassword);
         user.setPwHash(encodedPassword);
-
         user.setResetPasswordToken(null);
         userRepo.save(user);
-//        sendEmail(user, newPassword);
     }
 
 }

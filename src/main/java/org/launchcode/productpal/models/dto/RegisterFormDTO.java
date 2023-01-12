@@ -14,10 +14,12 @@ public class RegisterFormDTO extends LoginFormDTO {
     private String email;
 
     public String getVerifyPassword() {
+
         return verifyPassword;
     }
 
     public void setVerifyPassword(String verifyPassword) {
+
         this.verifyPassword = verifyPassword;
     }
 

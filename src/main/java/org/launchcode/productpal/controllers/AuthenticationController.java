@@ -158,17 +158,4 @@ public class AuthenticationController {
         }
     }
 
-    public User getByResetPasswordToken(String token) {
-        return userRepository.findByResetPasswordToken(token);
-    }
-
-    public void updatePassword(User user, String newPassword) {
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        String encodedPassword = passwordEncoder.encode(newPassword);
-        user.setPwHash(encodedPassword);
-
-        user.setResetPasswordToken(null);
-        userRepository.save(user);
-    }
-
 }

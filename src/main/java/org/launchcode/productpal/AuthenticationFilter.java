@@ -22,7 +22,7 @@ public class AuthenticationFilter extends HandlerInterceptorAdapter {
     AuthenticationController authenticationController;
 
     // Whitelist variable containing the paths that can be accessed without a user session
-    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/forgot_password","/forgot_password_form","/reset_password_form", "/css");
+    private static final List<String> whitelist = Arrays.asList("/login", "/register", "/logout", "/forgot_password","/forgot_password_form","/reset_password", "/reset_password_form", "/css");
 
     // Method that checks a given path against the values in the whitelist
     private static boolean isWhiteListed(String path) {

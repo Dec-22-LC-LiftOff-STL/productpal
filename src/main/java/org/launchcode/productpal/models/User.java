@@ -18,14 +18,6 @@ public class User extends AbstractEntity {
     @NotNull
     private String email;
 
-    public String getPwHash() {
-        return pwHash;
-    }
-
-    public void setPwHash(String pwHash) {
-        this.pwHash = pwHash;
-    }
-
     // Encrypted password fields
     @NotNull
     private String pwHash;
@@ -33,17 +25,6 @@ public class User extends AbstractEntity {
     // Reset password token
     @Column (name = "one_time_password")
     private String resetPasswordToken;
-
-    public String getOtpRequestedTime() {
-        return otpRequestedTime;
-    }
-
-    public void setOtpRequestedTime(String otpRequestedTime) {
-        this.otpRequestedTime = otpRequestedTime;
-    }
-
-    @Column (name = "otp_requested_time")
-    private String otpRequestedTime;
 
     public User() {}
 
@@ -56,6 +37,14 @@ public class User extends AbstractEntity {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getPwHash() {
+        return pwHash;
+    }
+
+    public void setPwHash(String pwHash) {
+        this.pwHash = pwHash;
     }
 
     public String getResetPasswordToken() {
