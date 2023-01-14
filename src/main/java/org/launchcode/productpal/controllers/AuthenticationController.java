@@ -147,15 +147,4 @@ public class AuthenticationController {
         // Redirect the user to the login form
         return "redirect:/login";
     }
-
-    public void updateResetPasswordToken(String token, String email) throws UserNotFoundException {
-        User user = userRepository.findByEmail(email);
-        if (user != null) {
-            user.setResetPasswordToken(token);
-            userRepository.save(user);
-        } else {
-            throw new UserNotFoundException("Could not find any user with the email " + email);
-        }
-    }
-
 }

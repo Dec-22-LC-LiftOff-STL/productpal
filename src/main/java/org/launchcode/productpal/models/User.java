@@ -23,7 +23,7 @@ public class User extends AbstractEntity {
     private String pwHash;
 
     // Reset password token
-    @Column (name = "one_time_password")
+    @Column (name = "reset_password_token")
     private String resetPasswordToken;
 
     public User() {}
@@ -44,7 +44,7 @@ public class User extends AbstractEntity {
     }
 
     public void setPwHash(String pwHash) {
-        this.pwHash = pwHash;
+        this.pwHash = encoder.encode(pwHash);
     }
 
     public String getResetPasswordToken() {

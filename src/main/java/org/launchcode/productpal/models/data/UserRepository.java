@@ -1,19 +1,22 @@
 package org.launchcode.productpal.models.data;
 
 import org.launchcode.productpal.models.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface UserRepository extends CrudRepository<User, Integer> {
-    // Special query method to find a user by their username
-    @Query
-    User findByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query
-    public User findByEmail(String email);
+    @Query("SELECT u FROM User u WHERE u.email = :email")
+    User findByEmail(@Param("email") String email);
 
-    @Query
-    public User findByResetPasswordToken(String token);
+    @Query("SELECT u FROM User u WHERE u.username = :username")
+    User findByUsername(@Param("username") String username);
+
+    @Query("SELECT u FROM User u WHERE u.resetPasswordToken = :resetPasswordToken")
+    User findByResetPasswordToken(@Param("resetPasswordToken") String resetPasswordToken);
+
 }

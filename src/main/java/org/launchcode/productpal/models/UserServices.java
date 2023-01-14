@@ -26,11 +26,18 @@ public class UserServices {
         }
     }
 
-    public User getByResetPasswordToken(String token) {
-        User user = userRepo.findByResetPasswordToken(token);
+    public User getByResetPasswordToken(String resetPasswordToken) throws UserNotFoundException {
+        if (resetPasswordToken == null) {
+            throw new IllegalArgumentException("Token cannot be null");
+        }
+        User user = userRepo.findByResetPasswordToken(resetPasswordToken);
+        if (user == null) {
+            throw new UserNotFoundException("User with given token not found");
+        }
         userRepo.save(user);
         return user;
-        }
+    }
+
 
     @Transactional
     public void updatePassword(User user, String newPassword) {

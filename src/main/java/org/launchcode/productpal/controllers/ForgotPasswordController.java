@@ -1,11 +1,14 @@
 package org.launchcode.productpal.controllers;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import net.bytebuddy.utility.RandomString;
 import org.launchcode.productpal.models.User;
 import org.launchcode.productpal.models.UserNotFoundException;
 import org.launchcode.productpal.models.UserServices;
 import org.launchcode.productpal.models.Utility;
 import org.launchcode.productpal.models.data.ProductRepository;
+import org.launchcode.productpal.models.data.UserRepository;
 import org.launchcode.productpal.models.dto.ResetFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -38,13 +41,18 @@ public class ForgotPasswordController {
     private UserServices userService;
 
     @Autowired
+    private UserRepository userRepo;
+
+    @Autowired
     private ProductRepository productRepository;
+
+    private static final Logger log = LoggerFactory.getLogger(ForgotPasswordController.class);
+
 
     @GetMapping("/forgot_password")
     public String showForgotPasswordForm() {
         return "forgot_password_form";
     }
-
 
 
     @PostMapping("/forgot_password")
@@ -87,7 +95,11 @@ public class ForgotPasswordController {
     }
 
     @GetMapping("/reset_password")
-    public String showResetPasswordForm(@Param(value = "token") String token, Model model) {
+    public String showResetPasswordForm(@Param(value = "token") String token, Model model) throws UserNotFoundException {
+        if(token == null) {
+            model.addAttribute("message", "Token cannot be null");
+            return "message";
+        }
         User user = userService.getByResetPasswordToken(token);
         model.addAttribute("token", token);
 
@@ -99,23 +111,34 @@ public class ForgotPasswordController {
         return "reset_password_form";
     }
 
-    @PostMapping("/reset_password")
-    public String processResetPassword(HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException {
-        String token = request.getParameter("token");
-        String password = request.getParameter("password");
-        User user = userService.getByResetPasswordToken(token);
 
+    @PostMapping("/reset_password")
+    public String processResetPassword(@Param(value="token") String token, @Param(value="password") String password, HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException, UserNotFoundException {
+        log.info("Received request to reset password");
+//        String token = request.getParameter("token");
+//        String password = request.getParameter("password");
+        if(password == null || password.isEmpty()){
+            model.addAttribute("message", "password can't be null or empty.");
+            return "message";
+        }
+        User user = userService.getByResetPasswordToken(token);
+        log.info("Retrieved user from service with token: {}", token);
         model.addAttribute("title", "Reset your password");
 
         if (user == null) {
+            log.info("Invalid token provided: {}", token);
             model.addAttribute("message", "Invalid Token");
             return "message";
         } else {
-            userService.updatePassword(user, password);
+            user.setPwHash(password);
+            userRepo.save(user);
+            log.info("Changed password for user with email: {}", user.getEmail());
             model.addAttribute("message", "You have successfully changed your password.");
         }
 
         return "message";
     }
+
+
 
 }
