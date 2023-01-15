@@ -11,7 +11,7 @@ It will all likely be changed so feel free to play around with the CSS in some p
 
 
 # TechJobs-Persistent-SpringBoot-App
-This application was made for my Web Development class. This SpringBoot app was made to create job listings for tech companies specifically. 
+This application was made for my Web Development class. This SpringBoot app was made to create product listings for tech companies specifically. 
 The CRUD repositiory is implemented to enable a few basic UI features for the project. 
 
 --TECH STACK--

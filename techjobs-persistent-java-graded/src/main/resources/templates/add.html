@@ -10,18 +10,18 @@
 <form method="post" style="max-width:600px;">
     <div class="form-group">
         <label th:for="name">Name</label>
-        <input class="form-control" th:field="${job.name}" />
-        <span th:errors="${job.name}" class="error"></span>
+        <input class="form-control" th:field="${product.name}" />
+        <span th:errors="${product.name}" class="error"></span>
     </div>
 
     <div class="form-group">
-        <label th:for="employer">Categories</label>
-        <select name="employerId">
-            <option th:each="employer : ${employers}"
-                    th:text="${employer.name}"
-                    th:value="${employer.id}"></option>
+        <label th:for="category">Categories</label>
+        <select name="categoryId">
+            <option th:each="category : ${categories}"
+                    th:text="${category.name}"
+                    th:value="${category.id}"></option>
         </select>
-        <a th:href="@{'/employers/add'}">Add Category</a>
+        <a th:href="@{'/categories/add'}">Add Category</a>
     </div>
 
     <div class="form-group">

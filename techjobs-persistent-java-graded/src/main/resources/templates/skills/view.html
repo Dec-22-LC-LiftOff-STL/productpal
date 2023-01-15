@@ -7,13 +7,13 @@
 
 <nav th:replace="fragments :: page-header"></nav>
 
-<div class="job-listing">
+<div class="product-listing">
     <p th:text="${'Name: ' + skill.name}"></p>
     <p th:text="${'Description: ' + skill.description}"></p>
     <p> Common Descriptions:
         <ul>
-            <li th:each="job : ${skill.jobs}">
-                <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>
+            <li th:each="product : ${skill.products}">
+                <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
             </li>
         </ul>
     </p>

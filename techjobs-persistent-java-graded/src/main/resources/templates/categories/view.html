@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+
+<body class="container  body-content">
+<h1 th:text="${'Category: ' + category.name}">Default Title</h1>
+
+<nav th:replace="fragments :: page-header"></nav>
+
+<div class="product-listing">
+    <p th:text="${'Name: ' + category.name}"></p>
+    <p th:text="${'Description: ' + category.description}"></p>
+</div>
+
+
+</body>
+</html>

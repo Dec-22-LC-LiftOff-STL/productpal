@@ -9,8 +9,8 @@
 <div class="container body-content">
     <h2>ProductPal</h2>
     <ul>
-        <li th:each="job : ${jobs}">
-            <a th:href="@{'/view/' + ${job.id}}" th:text="${job.name}"></a>
+        <li th:each="product : ${products}">
+            <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
         </li>
     </ul>
 

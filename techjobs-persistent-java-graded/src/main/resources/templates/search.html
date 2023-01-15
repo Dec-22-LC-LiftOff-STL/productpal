@@ -37,21 +37,21 @@
     <hr />
 
 
-    <table class="job-listing">
-        <tr th:each="job : ${jobs}">
+    <table class="product-listing">
+        <tr th:each="product : ${products}">
             <td>
                 <p>
                     Product Id:
-                    <a th:href="@{'/view/' + ${job.id}}" th:text="${job.id}"></a>
+                    <a th:href="@{'/view/' + ${product.id}}" th:text="${product.id}"></a>
                 </p>
-                <p th:text="${'Name: ' + job.name}"></p>
+                <p th:text="${'Name: ' + product.name}"></p>
                 <p>
                     Description:
-                    <a th:href="@{'/employers/view/' + ${job.employer.id}}" th:text="${job.employer.name}"></a>
+                    <a th:href="@{'/employers/view/' + ${product.category.id}}" th:text="${product.category.name}"></a>
                 </p>
                 <p>
                     Category:
-                    <ul th:each="skill : ${job.skills}">
+                    <ul th:each="skill : ${product.skills}">
                       <li>
                           <a th:href="@{'/skills/view/' + ${skill.id}}" th:text="${skill.name}"></a>
                       </li>
