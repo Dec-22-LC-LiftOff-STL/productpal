@@ -1,5 +1,7 @@
 package org.launchcode.productpal.controllers;
 
+import org.launchcode.productpal.models.CategoryService;
+import org.launchcode.productpal.models.data.CategoryRepository;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class HomeController {
     @Autowired
     private ProductRepository productRepository;
 
+    @Autowired
+    private CategoryRepository categoryRepository;
+
     @RequestMapping("")
     public String index(Model model) {
         model.addAttribute("products", productRepository.findAll());
@@ -29,6 +34,7 @@ public class HomeController {
     @GetMapping("add")
     public String displayAddProductForm(Model model) {
         model.addAttribute(new Product());
+        model.addAttribute("categories", categoryRepository.findAll());
         return "add";
     }
 
