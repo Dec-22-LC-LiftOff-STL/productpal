@@ -47,12 +47,12 @@ public class ListController {
         return "list";
     }
 
-    @RequestMapping(value = "jobs")
+    @RequestMapping(value = "products")
     public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Product> products;
         if (column.toLowerCase().equals("all")){
             products = productRepository.findAll();
-            model.addAttribute("title", "All Jobs");
+            model.addAttribute("title", "All Products");
         } else {
             products = ProductData.findByColumnAndValue(column, value, productRepository.findAll());
             model.addAttribute("title", "Products with " + columnChoices.get(column) + ": " + value);

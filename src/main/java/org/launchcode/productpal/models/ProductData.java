@@ -74,18 +74,16 @@ public class ProductData {
 
             if (product.getName().toLowerCase().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getCategory().toString().toLowerCase().contains(lower_val)) {
+            } else if (product.getCategory() != null && product.getCategory().toLowerCase().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getDescription().toString().toLowerCase().contains(lower_val)) {
+            } else if (product.getDescription() != null && product.getDescription().toLowerCase().contains(lower_val)) {
                 results.add(product);
             } else if (product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);
             }
-
         }
 
         return results;
     }
-
 
 }

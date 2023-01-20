@@ -51,7 +51,7 @@ public class HomeController {
         if (!optProduct.isEmpty()) {
             Product product = (Product) optProduct.get();
             model.addAttribute("product", product);
-            return "view";
+            return "list";
         } else {
             return "redirect:/";
         }

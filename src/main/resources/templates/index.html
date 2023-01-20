@@ -5,16 +5,33 @@
 <body class="container body-content">
 
 <div th:replace="fragments :: page-header"></div>
+<h2>ProductPal</h2>
 
-<div class="container body-content">
-    <h2>ProductPal</h2>
-    <ul>
-        <li th:each="product : ${products}">
-            <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
-        </li>
-    </ul>
+<table class="table-listing">
+    <tr th:each="product : ${products}">
+        <td>
+            <p>
+                Product Id:
+                <a th:href="@{'/view/' + ${product.id}}" th:text="${product.id}"></a>
+            </p>
+            <p th:text="${'Name: ' + product.name}"></p>
+            <p>
+                Category:
+                <a th:href="@{'/categories/list/' +" th:text="${product.category}"></a>
+            </p>
+            <p>
+                Description:
+            <ul th:each="description : ${product.description}">
+                <li>
+                    <a th:href="@{'/description/view/' +" th:text="${product.description}"></a>
+                </li>
+            </ul>
+            </p>
 
-</div>
+        </td>
+
+    </tr>
+</table>
 
 </body>
 </html>

@@ -23,9 +23,41 @@
                 <li><a th:href="@{/login}">Login</a></li>
                 <li><a th:href="@{/logout}">Logout</a></li>
                 <li><a th:href="@{/list}">List Products </a></li>
-                <li><a th:href="@{/search}">Search</a></li>
                 <li><a th:href="@{/add}">Add A Product, Pal!</a></li>
-                <li><a th:href="@{categories/add}">Add Category</a></li>
+                <li><a th:href="@{/categories/add}">Add Category</a></li>
+                <li>
+                    <form th:action="@{/index/results}" method = "post">
+                        <p>
+                            <input
+                                    type="radio"
+                                    name="searchType"
+                                    id="all"
+                                    value="all"
+                                    checked="true"/>
+
+                            <label for="all">all</label>
+
+                            <input
+                                    type="radio"
+                                    name="searchType"
+                                    id="name"
+                                    value="name"/>
+                            <label for="name">name</label>
+
+                            <input
+                                    type="radio"
+                                    name="searchType"
+                                    id="category"
+                                    value="category"/>
+                            <label for="category">category</label>
+
+
+                        </p>
+                        <label for="searchTerm"></label>
+                        <input type="text" name="searchTerm" id="searchTerm" />
+                        <input type="submit" value="Search" />
+                    </form>
+                </li>
             </ul>
         </div>
     </div>

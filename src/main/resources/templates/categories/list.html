@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org/">
+<head th:replace="fragments :: head"></head>
+<body class="container body-content">    <meta charset="UTF-8">
+<div align="center">
+    <title>List Category</title>
+    <nav th:replace="fragments :: page-header"></nav>
+    <h1> List Category </h1>
+    <br/>
+    <table border="1" cellpadding="10">
+        <thead class="">
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Action</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <th:block th:each="category: ${listCategory}">
+            <tr>
+                <td>[[${category.id}]]</td>
+                <td>[[${category.name}]]</td>
+                <td>[[${category.description}]]</td>
+
+                <td>
+                    <a  th:href="@{'/category/edit/'+ ${category.id}}">Edit</a>
+                    <a  th:href="@{'/category/delete/'+ ${category.id}}">Delete</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
