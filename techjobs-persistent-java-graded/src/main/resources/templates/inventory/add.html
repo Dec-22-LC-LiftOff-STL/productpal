@@ -12,14 +12,15 @@
 
       <form method="post" style="max-width:600px;">
       <div class="form-group">
-         <label th:for="productID">Product Id:
-            <p th:name="productID" th:text="${product.id}" th:id="productID">No Product Selected</p>
-            <span th:errors="${product.id}" class="error"></span>
+         <label th:for="productID">Product ID:
+            <p th:name="productID" th:text="${newProductThresholds.product.id}" th:id="productID"
+               th:field="${newProductThresholds.product.id}">No Product Selected</p>
+            <span th:errors="${newProductThresholds.product.id}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
-         <label th:for="name">Product Name:
-            <select th:name="name" required id="name">
+         <label th:for="productName">Product Name:
+            <select th:name="productName" required id="productName" th:field="${newProductThresholds.product.id}">
                <option th:value="0" disabled selected hidden>Choose a product!</option>
                <option th:each="product : ${products}"
                     th:text="${product.name}"
@@ -30,17 +31,19 @@
       </div>
 <!--      <div class="form-group">-->
 <!--         <label th:for="category">Category:-->
-<!--            <p th:name="category" th:text="${product.category?.name}" th:id="category">No Category Assigned!</p>-->
-<!--            <span th:errors="${product.category.name}" class="error"></span>-->
+<!--            <p th:name="category" th:text="${newProductThresholds.product.category?.name}" th:id="category"-->
+<!--               th:field="${newProductThresholds.product.category.name}">No Category Assigned!</p>-->
+<!--            <span th:errors="${newProductThresholds.product.category.name}" class="error"></span>-->
 <!--         </label>-->
 <!--      </div>-->
       <div class="form-group">
          <label th:for="amount">Amount:
-            <input class="form-control" th:name="amount" th:field="${product.amount}" th:id="amount"/>
-            <span th:errors="${product.amount}" class="error"></span>
+            <input class="form-control" th:name="amount" th:field="${newProductThresholds.product.amount}" th:id="amount"/>
+            <span th:errors="${newProductThresholds.product.amount}" class="error"></span>
          </label>
       </div>
           <script>
+<!--             window.addEventListener("load", function() {-->
                 let dropdown = document.getElementById("name");
                 dropdown.addEventListener("change", function (event) {
                 document.getElementById("productID").innerHTML = dropdown.value;
@@ -50,22 +53,24 @@
 <!--                    Product product = (Product) dropdown.options[i];-->
 <!--                    document.getElementById("category").innerHTML = product.category.name;-->
 <!--                    document.getElementById("amount").innerHTML = product.options[i].amount;-->
+                    event.preventDefault();
                    }
-                }
+                 }
                 });
+<!--              });-->
           </script>
       <div class="form-group">
          <label th:for="lowThreshold">Low Threshold:
-            <input class="form-control" th:field="${thresholds.lowThreshold}"
+            <input class="form-control" th:field="${newProductThresholds.thresholds.lowThreshold}"
                    th:name="lowThreshold" />
-            <span th:errors="${thresholds.lowThreshold}" class="error"></span>
+            <span th:errors="${newProductThresholds.thresholds.lowThreshold}" class="error"></span>
          </label>
       </div>
       <div class="form-group">
          <label th:for="highThreshold">High Threshold:
-            <input class="form-control" th:field="${thresholds.highThreshold}"
+            <input class="form-control" th:field="${newProductThresholds.thresholds.highThreshold}"
                   th:name="highThreshold"/>
-            <span th:errors="${thresholds.highThreshold}" class="error"></span>
+            <span th:errors="${newProductThresholds.thresholds.highThreshold}" class="error"></span>
          </label>
       </div>
       <input type="submit" value="Update Inventory" />
