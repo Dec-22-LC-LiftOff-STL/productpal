@@ -33,16 +33,16 @@ public class SearchController {
 
     @PostMapping("results")
     public String displaySearchResults(Model model,  @RequestParam String searchType, @RequestParam String searchTerm){
-        Iterable<Product> jobs;
+        Iterable<Product> Products;
         if (searchTerm.toLowerCase().equals("all") || searchTerm.equals("")){
-            jobs = productRepository.findAll();
+            Products = productRepository.findAll();
         } else {
 
-            jobs = ProductData.findByColumnAndValue(searchType, searchTerm, productRepository.findAll());
+            Products = ProductData.findByColumnAndValue(searchType, searchTerm, productRepository.findAll());
         }
         model.addAttribute("columns", columnChoices);
-        model.addAttribute("title", "Jobs with " + columnChoices.get(searchType) + ": " + searchTerm);
-        model.addAttribute("jobs", jobs);
+        model.addAttribute("title", "Product with " + columnChoices.get(searchType) + ": " + searchTerm);
+        model.addAttribute("products", Products);
 
         return "index";
         //changed return search to index
