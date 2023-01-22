@@ -9,26 +9,18 @@ import org.launchcode.productpal.models.UserServices;
 import org.launchcode.productpal.models.Utility;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.data.UserRepository;
-import org.launchcode.productpal.models.dto.ResetFormDTO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.data.repository.query.Param;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.mail.MessagingException;
-import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import javax.validation.constraints.Email;
 import java.io.UnsupportedEncodingException;
-import java.util.Properties;
 
 
 @Controller

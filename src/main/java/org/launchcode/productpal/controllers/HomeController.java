@@ -34,15 +34,19 @@ public class HomeController {
     @GetMapping("add")
     public String displayAddProductForm(Model model) {
         model.addAttribute(new Product());
+        model.addAttribute("products", productRepository.findAll());
         model.addAttribute("categories", categoryRepository.findAll());
         return "add";
     }
 
     @PostMapping("add")
-    public String processAddProductForm(@ModelAttribute @Valid Product newProduct,
+    public String processAddProductForm(@ModelAttribute @Valid Product newProduct, Model model,
                                     Errors errors) {
 
         if (errors.hasErrors()) {
+            model.addAttribute(new Product());
+            model.addAttribute("products", productRepository.findAll());
+            model.addAttribute("categories", categoryRepository.findAll());
             return "add";
         }
 
