@@ -14,19 +14,18 @@
                 Product Id:
                 <a th:href="@{'/view/' + ${product.id}}" th:text="${product.id}"></a>
             </p>
-            <p th:text="${'Name: ' + product.name}"></p>
+            <p>
+                Name:
+                <a th:href="@{'/view/' + ${product.name}}" th:text="${product.name}"></a>
+            </p>
             <p>
                 Category:
                 <a th:href="@{'/categories/list/' + ${product.category}}" th:text="${product.category}"></a>
             </p>
-            <p>
-                Description:
-            <ul th:each="description : ${product.description}">
-                <li>
-                    <a th:href="@{'/description/view/' + ${product.description}}" th:text="${product.description}"></a>
-                </li>
-            </ul>
+            <p th:text="${'Description: ' + product.description}">
             </p>
+            <p th:text="${'Amount: ' + product.amount}"></p>
+
 
         </td>
 
