@@ -51,7 +51,7 @@ public class ThresholdsController {
     }
 
     @PostMapping("add")
-    public String processAddThresholds(@ModelAttribute ProductThresholdsDTO newProductThresholds,
+    public String processAddThresholds(@ModelAttribute @Valid ProductThresholdsDTO newProductThresholds,
                                        Model model, Errors errors){
         if (errors.hasErrors()) {
             model.addAttribute("title", "Update Product Inventory");
@@ -66,8 +66,6 @@ public class ThresholdsController {
         try {
             Iterable<Product> products = productRepository.findAll();
 
-
-
             Optional<Product> optProduct = productRepository.findById(newProductThresholds.getProduct().getId());
 
             if (optProduct.isPresent()) {
@@ -79,7 +77,7 @@ public class ThresholdsController {
                 if (product.getThresholds() == null) {
                     Thresholds thresholds = new Thresholds(product,
                             newProductThresholds.getThresholds().getLowThreshold(),
-                            newProductThresholds.getThresholds().getLowThreshold());
+                            newProductThresholds.getThresholds().getHighThreshold());
                     newProductThresholds.setThresholds(thresholds);
                     thresholdsRepository.save(thresholds);
                 } else {
