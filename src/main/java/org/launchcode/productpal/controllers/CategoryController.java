@@ -37,26 +37,22 @@ public class CategoryController {
 
         return "categories/list";
     }
+
     @PostMapping("add")
-    public String saveCategory(Category category){
-        System.out.println(category);
+    public String saveCategory(Category category, RedirectAttributes ra) {
         categoryService.save(category);
-        return "categories/list";
+        ra.addFlashAttribute("message", "Category added successfully");
+        return "redirect:list";
     }
-    /* @GetMapping("/category/edit/{id}")
-     public ModelAndView showEditCategoryPage(@PathVariable(name = "id") int id) {
-         ModelAndView mav = new ModelAndView("edit_category");
-        Category category =  categoryService.get(id);
-         mav.addObject("category", category);
-         return mav;
-     }*/
+
+
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
         try {
             Category category=categoryService.get(id);
             model.addAttribute("category", category);
             model.addAttribute("pageTitle","Edit category");
-            return "categories/add";
+            return "categories/edit";
         } catch (UserNotFoundException e) {
             ra.addAttribute("message","category added successfully");
             return "categories/list";
@@ -69,7 +65,7 @@ public class CategoryController {
             Category category=categoryService.getByName(name);
             model.addAttribute("category", category);
             model.addAttribute("pageTitle","Edit category");
-            return "categories/add";
+            return "categories/show";
         } catch (UserNotFoundException e) {
             ra.addAttribute("message","category added successfully");
             return "categories/list";

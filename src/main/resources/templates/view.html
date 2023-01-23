@@ -3,9 +3,9 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container  body-content">
-<h1 th:text="${'Product: ' + product.name}">Default Title</h1>
 
 <nav th:replace="fragments :: page-header"></nav>
+<h1 th:text="${'Product: ' + product.name}">Default Title</h1>
 
 <div class="product-listing">
     <p th:text="${'ID: ' + product.id}"></p>
@@ -15,7 +15,7 @@
     </p>
     <p> Description:
     <ul>
-        <li th:each="skill : ${product.description}">
+        <li th:each="description : ${descriptions}">
             <a th:href="@{'/description/view/' + ${description.id}}" th:text="${description.name}"></a>
         </li>
     </ul>
