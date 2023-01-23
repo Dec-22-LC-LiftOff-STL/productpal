@@ -17,12 +17,12 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-//    @GetMapping("")
-//    public String index (Model model){
-//        model.addAttribute("title", "All Categories");
-//        model.addAttribute("categories", categoryRepository.findAll());
-//        return "categories/index";
-//    }
+    @GetMapping("")
+    public String index (Model model){
+        model.addAttribute("title", "All Categories");
+        model.addAttribute("categories", categoryRepository.findAll());
+        return "categories/index";
+    }
 
     @GetMapping("add")
     public String displayAddEmployerForm(Model model) {

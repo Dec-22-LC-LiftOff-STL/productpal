@@ -3,25 +3,23 @@
 <head th:replace="fragments :: head"></head>
 
 <body class="container  body-content">
-<h1 th:text="${'Product: ' + product.name}">Default Title</h1>
 
 <nav th:replace="fragments :: page-header"></nav>
 
 <div class="product-listing">
    <p th:text="${'ID: ' + product.id}"></p>
    <p th:text="${'Name: ' + product.name}"></p>
-   <p th:text="${'Amount: ' + product.amount}"></p>
    <p>
       Category: <a th:href="@{'/categories/view/' + ${product.category.id}}" th:text="${product.category.name}"></a>
    </p>
+   <p th:text="${'Amount: ' + product.amount}"></p>
    <p> Thresholds:
    <ul>
-      <li th:text="${'Low: ' + thresholds.lowThreshold}"></li>
-      <li th:text="${'High: ' + thresholds.highThreshold}"></li>
+      <li th:text="${'Low: ' + productThreshold.thresholds.lowThreshold}"></li>
+      <li th:text="${'High: ' + productThreshold.thresholds.highThreshold}"></li>
    </ul>
    </p>
 </div>
-
 
 </body>
 
