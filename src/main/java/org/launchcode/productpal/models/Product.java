@@ -18,8 +18,16 @@ public class Product extends AbstractEntity{
     @ManyToOne
     private Description description;
     private Integer amount;
-    @OneToOne
-    private Thresholds thresholds;
+//    @OneToOne
+//    private Thresholds thresholds;
+
+    private int lowThreshold;
+
+    private int highThreshold;
+
+    private boolean reorderNeeded;
+
+    private boolean saleNeeded;
 
     public Product() {
     }
@@ -67,12 +75,44 @@ public class Product extends AbstractEntity{
         this.amount = amount;
     }
 
-    public Thresholds getThresholds() {
-        return thresholds;
+//    public Thresholds getThresholds() {
+//        return thresholds;
+//    }
+//
+//    public void setThresholds(Thresholds thresholds) {
+//        this.thresholds = thresholds;
+//    }
+
+    public int getLowThreshold() {
+        return lowThreshold;
     }
 
-    public void setThresholds(Thresholds thresholds) {
-        this.thresholds = thresholds;
+    public void setLowThreshold(int lowThreshold) {
+        this.lowThreshold = lowThreshold;
+    }
+
+    public int getHighThreshold() {
+        return highThreshold;
+    }
+
+    public void setHighThreshold(int highThreshold) {
+        this.highThreshold = highThreshold;
+    }
+
+    public boolean isReorderNeeded() {
+        return reorderNeeded;
+    }
+
+    public void setReorderNeeded(boolean reorderNeeded) {
+        this.reorderNeeded = (this.getAmount() < this.lowThreshold);
+    }
+
+    public boolean isSaleNeeded() {
+        return saleNeeded;
+    }
+
+    public void setSaleNeeded(boolean saleNeeded) {
+        this.saleNeeded = (this.getAmount() > this.highThreshold);
     }
 
     @Override
