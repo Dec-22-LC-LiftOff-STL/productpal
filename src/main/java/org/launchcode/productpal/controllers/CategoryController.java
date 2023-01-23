@@ -73,13 +73,14 @@ public class CategoryController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deleteCategory(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
+    public String deleteCategory(@PathVariable("id")Integer id, RedirectAttributes ra){
         try {
             categoryService.deleteCategory(id);
+            ra.addFlashAttribute("message", "Category deleted successfully");
         } catch (UserNotFoundException e) {
-            ra.addAttribute("message","category added successfully");
-
+            ra.addFlashAttribute("message", e.getMessage());
         }
-        return "categories/list";
+        return "redirect:/categories/list";
     }
+
 }

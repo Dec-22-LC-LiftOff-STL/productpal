@@ -17,6 +17,7 @@
 
         </tr>
         </thead>
+        <div th:if="${message}" th:text="${message}"></div>
         <tbody>
         <th:block th:each="category: ${listCategory}">
             <tr>
@@ -25,7 +26,9 @@
 
                 <td>
                     <a  th:href="@{'/category/edit/'+ ${category.id}}">Edit</a>
-                    <a  th:href="@{'/category/delete/'+ ${category.id}}">Delete</a>
+                    <form action="@{'/categories/delete/' + ${category.id}" method="get">
+                        <input type="submit" value="Delete"></input>
+                    </form>
                 </td>
             </tr>
         </th:block>
