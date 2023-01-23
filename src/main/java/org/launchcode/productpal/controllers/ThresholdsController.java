@@ -4,7 +4,7 @@ import org.launchcode.productpal.models.Product;
 import org.launchcode.productpal.models.Thresholds;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.data.ThresholdsRepository;
-import org.launchcode.productpal.persistent.models.dto.ProductThresholdsDTO;
+import org.launchcode.productpal.models.dto.ProductThresholdsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @Controller
-@RequestMapping("inventory")
+@RequestMapping("thresholds")
 public class ThresholdsController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class ThresholdsController {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return "inventory/add";
+        return "thresholds/add";
     }
 
     @PostMapping("add")
@@ -57,7 +57,7 @@ public class ThresholdsController {
             model.addAttribute("title", "Update Product Inventory");
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute( "newProductThresholds", newProductThresholds);
-            return "inventory/add";
+            return "thresholds/add";
         }
         if (newProductThresholds.getProduct().getId() > 0) {
 
@@ -110,7 +110,7 @@ public class ThresholdsController {
                 model.addAttribute( "product", optProduct.get());
                 Optional<Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
                 model.addAttribute("thresholds", optThresholds.get());
-                return "inventory/view";
+                return "thresholds/view";
             }
 
             ProductThresholdsDTO productThresholdDTO = new ProductThresholdsDTO();
