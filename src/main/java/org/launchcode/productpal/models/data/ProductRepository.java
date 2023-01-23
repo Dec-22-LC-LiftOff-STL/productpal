@@ -11,5 +11,7 @@ import java.util.ArrayList;
 @Repository
 @Transactional
 public interface ProductRepository extends CrudRepository<Product, Integer> {
+    Iterable<Product> findAll();
     public ArrayList<Category> findByName (String name);
+    Iterable<Product> findByCategoryName(String name);
 }

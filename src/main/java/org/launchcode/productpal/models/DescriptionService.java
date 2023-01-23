@@ -4,19 +4,20 @@ import org.launchcode.productpal.models.data.DescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class DescriptionService {
     @Autowired
-    private static DescriptionRepository descriptionRepository;
+    private DescriptionRepository descriptionRepository;
     public List<Description> listDescription(){
         return (List<Description>) descriptionRepository.findAll();
 
     }
 
-    public static void save(Description description) {
+    public void save(Description description) {
         descriptionRepository.save(description);
     }
 
@@ -27,6 +28,15 @@ public class DescriptionService {
         }
         throw new UserNotFoundException("Could not found user by ID");
     }
+
+    public Description getByName(String name) throws UserNotFoundException {
+        List<Description> result = descriptionRepository.findByName(name);
+        if(result.size()>0){
+            return result.get(0);
+        }
+        throw new UserNotFoundException("Could not found user by NAME");
+    }
+
     public void deleteDescription(Integer id) throws UserNotFoundException {
 
         Long count=descriptionRepository.countById(id);

@@ -4,21 +4,26 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import javassist.runtime.Desc;
+import org.launchcode.productpal.models.Category;
+
 @Entity
 public class Product extends AbstractEntity{
 
     @NotNull
     @Size(min=3, max=50)
     private String name;
-    private String category;
-    private String description;
+    @ManyToOne
+    private Category category;
+    @ManyToOne
+    private Description description;
     private Integer amount;
 
     public Product() {
     }
 
     // Initialize the id and value fields.
-    public Product(String aName, String aCategory, String aDescription, Integer anAmount) {
+    public Product(String aName, Category aCategory, Description aDescription, Integer anAmount) {
         super();
         this.name = aName;
         this.category = aCategory;
@@ -36,19 +41,19 @@ public class Product extends AbstractEntity{
         this.name = name;
     }
 
-    public String getCategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 
-    public String getDescription() {
+    public Description getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public void setDescription(Description description) {
         this.description = description;
     }
 

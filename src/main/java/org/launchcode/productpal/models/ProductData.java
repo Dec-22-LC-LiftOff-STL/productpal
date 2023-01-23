@@ -34,14 +34,25 @@ public class ProductData {
             return results;
         }
         for (Product product : allProducts) {
-
-            String aValue = getFieldValue(product, column);
-
-            if (aValue != null && aValue.toLowerCase().contains(value.toLowerCase())) {
+            if (column.equals("all")) {
                 results.add(product);
             }
+            if (column.equals("name")) {
+                if (product.getName().toLowerCase().contains(value.toLowerCase())) {
+                    results.add(product);
+                }
+            }
+            if (column.equals("category")) {
+                if (product.getCategory() != null && product.getCategory().getName().toLowerCase().contains(value.toLowerCase())) {
+                    results.add(product);
+                }
+            }
+            if (column.equals("description")) {
+                if (product.getDescription() != null && product.getDescription().getName().toLowerCase().contains(value.toLowerCase())) {
+                    results.add(product);
+                }
+            }
         }
-
         return results;
     }
 
@@ -50,10 +61,11 @@ public class ProductData {
         if (fieldName.equals("name")){
             theValue = product.getName();
         } else if (fieldName.equals("category")){
-            theValue = product.getCategory().toString();
+            theValue = product.getCategory().getName();
         } else {
-            theValue = product.getDescription().toString();
+            theValue = product.getDescription().getName();
         }
+
 
         return theValue;
     }
@@ -74,9 +86,9 @@ public class ProductData {
 
             if (product.getName().toLowerCase().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getCategory() != null && product.getCategory().toLowerCase().contains(lower_val)) {
+            } else if (product.getCategory() != null && product.getCategory().getName().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getDescription() != null && product.getDescription().toLowerCase().contains(lower_val)) {
+            } else if (product.getDescription() != null && product.getDescription().getName().contains(lower_val)) {
                 results.add(product);
             } else if (product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);

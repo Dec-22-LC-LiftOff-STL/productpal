@@ -14,8 +14,8 @@
 <table class="centeredTable">
     <tr>
         <th>All</th>
-        <th>Description</th>
         <th>Category</th>
+        <th>Description</th>
     </tr>
 
     <tr>
@@ -26,7 +26,7 @@
         </td>
         <td>
             <li th:each="category : ${categories}">
-                <a th:href="@{/list/products(column=category,value=${category.name})}" th:text="${category.name}"></a>
+                <a th:href="@{/categories/list(column=category,value=${category.name})}" th:text="${category.name}"></a>
             </li>
         </td>
         <td>
@@ -36,6 +36,24 @@
         </td>
     </tr>
 </table>
+
+<!--<div th:if="${not #lists.isEmpty(products)}">-->
+<!--    <table class="centeredTable">-->
+<!--        <tr>-->
+<!--            <th>Name</th>-->
+<!--            <th>Category</th>-->
+<!--            <th>Description</th>-->
+<!--        </tr>-->
+<!--        <tr th:each="product : ${products}">-->
+<!--            <td th:text="${product.name}"></td>-->
+<!--            <td th:text="${product.category.name}"></td>-->
+<!--            <td th:text="${product.description.name}"></td>-->
+<!--        </tr>-->
+<!--    </table>-->
+<!--</div>-->
+<!--<div th:if="${#lists.isEmpty(products)}">-->
+<!--    <h2 class="centered">No products to display</h2>-->
+<!--</div>-->
 
 </body>
 </html>

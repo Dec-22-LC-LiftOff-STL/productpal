@@ -8,10 +8,13 @@ import org.launchcode.productpal.models.data.DescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Created by LaunchCode
@@ -48,17 +51,27 @@ public class ListController {
     }
 
     @RequestMapping(value = "products")
-    public String listJobsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
+    public String listProductsByColumnAndValue(Model model, @RequestParam String column, @RequestParam String value) {
         Iterable<Product> products;
-        if (column.toLowerCase().equals("all")){
-            products = productRepository.findAll();
+        if (column.equals("all")){
+            products = ProductData.findByColumnAndValue(column, value, productRepository.findAll());
             model.addAttribute("title", "All Products");
         } else {
             products = ProductData.findByColumnAndValue(column, value, productRepository.findAll());
             model.addAttribute("title", "Products with " + columnChoices.get(column) + ": " + value);
         }
+        List<Product> productsList = (List<Product>) products;
+        System.out.println("Number of products retrieved: " + productsList.size());
         model.addAttribute("products", products);
-
         return "list-products";
     }
+
+    @RequestMapping(value = "category/{name}")
+    public String listProductsByCategory(Model model, @PathVariable String name) {
+        Iterable<Product> products = productRepository.findByCategoryName(name);
+        model.addAttribute("products", products);
+        model.addAttribute("title", "Products in category: " + name);
+        return "categories/list";
+    }
+
 }
