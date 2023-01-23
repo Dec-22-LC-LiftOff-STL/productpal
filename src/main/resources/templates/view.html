@@ -11,12 +11,12 @@
     <p th:text="${'ID: ' + product.id}"></p>
     <p th:text="${'Name: ' + product.name}"></p>
     <p>
-        Category: <a th:href="@{'/categories/list/' + ${product.category.id}}" th:text="${product.categories.name}"></a>
+        Category: <a th:href="@{'/categories/list/' + ${product.category}}" th:text="${product.category}"></a>
     </p>
     <p> Description:
     <ul>
         <li th:each="description : ${descriptions}">
-            <a th:href="@{'/description/view/' + ${description.id}}" th:text="${description.name}"></a>
+            <a th:href="@{'/description/view/' + ${product.description}}" th:text="${product.description}"></a>
         </li>
     </ul>
     </p>

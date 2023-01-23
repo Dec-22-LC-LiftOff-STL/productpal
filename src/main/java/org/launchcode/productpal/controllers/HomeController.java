@@ -11,6 +11,7 @@ import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.Optional;
 
 /**
@@ -54,14 +55,13 @@ public class HomeController {
         return "redirect:";
     }
 
-    @GetMapping("view/{productId}")
-    public String displayViewProduct(Model model, @PathVariable int productId) {
+    @GetMapping("view/{name}")
+    public String displayViewProduct(Model model, @PathVariable String name) {
 
-        Optional optProduct = productRepository.findById(productId);
-        if (!optProduct.isEmpty()) {
-            Product product = (Product) optProduct.get();
+        Product product = productRepository.findFirstByName(name);
+        if (product != null) {
             model.addAttribute("product", product);
-            return "list";
+            return "view";
         } else {
             return "redirect:/";
         }

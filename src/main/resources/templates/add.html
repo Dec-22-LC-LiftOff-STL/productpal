@@ -38,8 +38,8 @@
 
     <div class="form-group">
         <label th:for="product">Amount</label>
-        <input type="range" class="form-control" th:field="${product.amount}" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-        <output>24</output>
+        <input type="range" class="form-control" th:field="${product.amount}" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+        <output>0</output>
     </div>
 
     <input type="submit" value="Add Product" />
