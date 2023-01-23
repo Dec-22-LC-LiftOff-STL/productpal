@@ -18,6 +18,8 @@ public class Product extends AbstractEntity{
     @ManyToOne
     private Description description;
     private Integer amount;
+    @OneToOne
+    private Thresholds thresholds;
 
     public Product() {
     }
@@ -63,6 +65,14 @@ public class Product extends AbstractEntity{
 
     public void setAmount(Integer amount) {
         this.amount = amount;
+    }
+
+    public Thresholds getThresholds() {
+        return thresholds;
+    }
+
+    public void setThresholds(Thresholds thresholds) {
+        this.thresholds = thresholds;
     }
 
     @Override
