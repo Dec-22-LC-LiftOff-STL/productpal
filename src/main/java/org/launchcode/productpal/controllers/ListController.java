@@ -1,5 +1,6 @@
 package org.launchcode.productpal.controllers;
 
+import org.launchcode.productpal.models.Category;
 import org.launchcode.productpal.models.Product;
 import org.launchcode.productpal.models.data.CategoryRepository;
 import org.launchcode.productpal.models.data.ProductRepository;
@@ -63,12 +64,13 @@ public class ListController {
         List<Product> productsList = (List<Product>) products;
         System.out.println("Number of products retrieved: " + productsList.size());
         model.addAttribute("products", products);
+
         return "list-products";
     }
 
     @RequestMapping(value = "category/{name}")
     public String listProductsByCategory(Model model, @PathVariable String name) {
-        Iterable<Product> products = productRepository.findByCategoryName(name);
+        Iterable<Category> products = productRepository.findByCategoryName(name);
         model.addAttribute("products", products);
         model.addAttribute("title", "Products in category: " + name);
         return "categories/list";

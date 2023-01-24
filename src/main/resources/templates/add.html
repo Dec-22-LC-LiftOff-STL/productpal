@@ -11,13 +11,7 @@
     <div class="form-group">
         <label th:for="name">Name</label>
         <input class="form-control" th:field="${product.name}" />
-        <select name="productId">
-        <option th:each="product : ${products}"
-                th:text="${product.name}"
-                th:value="${product.id}">
-        </option>
-        <span th:errors="${product.name}" class="error"></span>
-        </select>
+
     </div>
 
     <div class="form-group">
@@ -32,14 +26,14 @@
 
     <div class="form-group">
         <label th:for="Description">Description</label>
-        <input class="form-control" th:field="${product.description}" />
-        <span th:errors="${product.description}" class="error"></span>
+        <input class="form-control" th:field="${product.description.name}" />
+        <span th:errors="${product.description.name}" class="error"></span>
     </div>
 
     <div class="form-group">
         <label th:for="product">Amount</label>
-        <input type="range" class="form-control" th:field="${product.amount}" value="24" min="1" max="100" oninput="this.nextElementSibling.value = this.value">
-        <output>24</output>
+        <input type="range" class="form-control" th:field="${product.amount}" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+        <output>0</output>
     </div>
 
     <input type="submit" value="Add Product" />
