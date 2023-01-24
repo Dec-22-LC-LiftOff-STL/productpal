@@ -92,11 +92,8 @@ public class ProductData {
                 results.add(product);
             } else if (product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);
-<<<<<<< HEAD
             } else if (product.getAmount() != null && Integer.parseInt(lower_val) == product.getAmount()){
-=======
             }else if (product.getThresholds() != null && Integer.parseInt(lower_val) == product.getThresholds().getId()){
->>>>>>> 191002d0d2081965c9d79357d030e97c74b08fd6
                 results.add(product);
             }
         }
