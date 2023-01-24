@@ -75,14 +75,6 @@ public class Product extends AbstractEntity{
         this.amount = amount;
     }
 
-//    public Thresholds getThresholds() {
-//        return thresholds;
-//    }
-//
-//    public void setThresholds(Thresholds thresholds) {
-//        this.thresholds = thresholds;
-//    }
-
     public int getLowThreshold() {
         return lowThreshold;
     }

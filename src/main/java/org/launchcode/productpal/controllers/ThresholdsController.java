@@ -41,9 +41,10 @@ public class ThresholdsController {
 
 
             model.addAttribute("title", "Update Product Inventory");
-            ProductThresholdsDTO newProductThresholds = new ProductThresholdsDTO();
-            model.addAttribute("newProductThresholds", newProductThresholds);
+//            ProductThresholdsDTO newProductThresholds = new ProductThresholdsDTO();
+//            model.addAttribute("newProductThresholds", newProductThresholds);
             model.addAttribute("products", productRepository.findAll());
+            model.addAttribute("product", new Product());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -51,43 +52,43 @@ public class ThresholdsController {
     }
 
     @PostMapping("add")
-    public String processAddThresholds(@ModelAttribute @Valid ProductThresholdsDTO newProductThresholds,
+    public String processAddThresholds(@ModelAttribute @Valid Product product,
                                        Model model, Errors errors){
         if (errors.hasErrors()) {
             model.addAttribute("title", "Update Product Inventory");
             model.addAttribute("products", productRepository.findAll());
-            model.addAttribute( "newProductThresholds", newProductThresholds);
+            model.addAttribute( "product", product);
             return "thresholds/add";
-        }
-        if (newProductThresholds.getProduct().getId() > 0) {
-
         }
 
         try {
             Iterable<Product> products = productRepository.findAll();
-
-            Optional<Product> optProduct = productRepository.findById(newProductThresholds.getProduct().getId());
+            Optional<Product> optProduct = productRepository.findById(product.getId());
 
             if (optProduct.isPresent()) {
-                Product product = optProduct.get();
-                product.setAmount(newProductThresholds.getProduct().getAmount());
-                newProductThresholds.setProduct(product);
-                productRepository.save(product);
+                Product productToSave = optProduct.get();
+                productToSave.setName(product.getName());
+                productToSave.setCategory(product.getCategory());
+                productToSave.setAmount(product.getAmount());
+//                newProductThresholds.setProduct(product);
+                productToSave.setLowThreshold(product.getLowThreshold());
+                productToSave.setHighThreshold(product.getHighThreshold());
+                productRepository.save(productToSave);
 
-                if (product.getThresholds() == null) {
-                    Thresholds thresholds = new Thresholds(product,
-                            newProductThresholds.getThresholds().getLowThreshold(),
-                            newProductThresholds.getThresholds().getHighThreshold());
-                    newProductThresholds.setThresholds(thresholds);
-                    thresholdsRepository.save(thresholds);
-                } else {
-                    Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-                    Thresholds thresholds = optThresholds.get();
-                    thresholds.setLowThreshold(newProductThresholds.getThresholds().getLowThreshold());
-                    thresholds.setHighThreshold(newProductThresholds.getThresholds().getHighThreshold());
-                    newProductThresholds.setThresholds(thresholds);
-                    thresholdsRepository.save(thresholds);
-                }
+//                if (product.getThresholds() == null) {
+//                    Thresholds thresholds = new Thresholds(product,
+//                            newProductThresholds.getThresholds().getLowThreshold(),
+//                            newProductThresholds.getThresholds().getHighThreshold());
+//                    newProductThresholds.setThresholds(thresholds);
+//                    thresholdsRepository.save(thresholds);
+//                } else {
+//                    Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
+//                    Thresholds thresholds = optThresholds.get();
+//                    thresholds.setLowThreshold(newProductThresholds.getThresholds().getLowThreshold());
+//                    thresholds.setHighThreshold(newProductThresholds.getThresholds().getHighThreshold());
+//                    newProductThresholds.setThresholds(thresholds);
+//                    thresholdsRepository.save(thresholds);
+//                }
             } else {
 //                window.log("Product must be selected!");
             }
@@ -106,18 +107,18 @@ public class ThresholdsController {
                 model.addAttribute("title", "Product Threshold for Product ID: " +productID);
                 Optional<Product> optProduct = productRepository.findById(productID);
                 model.addAttribute( "product", optProduct.get());
-                Optional<Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-                model.addAttribute("thresholds", optThresholds.get());
+//                Optional<Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
+//                model.addAttribute("thresholds", optThresholds.get());
                 return "thresholds/view";
             }
 
-            ProductThresholdsDTO productThresholdDTO = new ProductThresholdsDTO();
+//            ProductThresholdsDTO productThresholdDTO = new ProductThresholdsDTO();
             Optional<Product> optProduct = productRepository.findById(productID);
             if (optProduct.isPresent()) {
-                productThresholdDTO.setProduct(optProduct.get());
-                Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-                productThresholdDTO.setThresholds(optThresholds.get());
-                model.addAttribute("productThreshold", productThresholdDTO);
+//                productThresholdDTO.setProduct(optProduct.get());
+//                Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
+//                productThresholdDTO.setThresholds(optThresholds.get());
+                model.addAttribute("product", optProduct.get());
             }
         } catch (Exception e) {
             e.printStackTrace();
