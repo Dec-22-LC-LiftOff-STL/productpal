@@ -21,8 +21,8 @@ public class Product extends AbstractEntity{
     private String description;
 
     private Integer amount;
-//    @OneToOne
-//    private Thresholds thresholds;
+    @OneToOne
+    private Thresholds thresholds;
 
     private int lowThreshold;
 
@@ -78,13 +78,13 @@ public class Product extends AbstractEntity{
         this.amount = amount;
     }
 
-//    public Thresholds getThresholds() {
-//        return thresholds;
-//    }
-//
-//    public void setThresholds(Thresholds thresholds) {
-//        this.thresholds = thresholds;
-//    }
+    public Thresholds getThresholds() {
+        return thresholds;
+    }
+
+    public void setThresholds(Thresholds thresholds) {
+        this.thresholds = thresholds;
+    }
 
     public int getLowThreshold() {
         return lowThreshold;
