@@ -2,9 +2,9 @@ package org.launchcode.productpal.controllers;
 
 import org.launchcode.productpal.models.Category;
 import org.launchcode.productpal.models.CategoryService;
-import org.launchcode.productpal.models.Description;
+//import org.launchcode.productpal.models.Description;
 import org.launchcode.productpal.models.data.CategoryRepository;
-import org.launchcode.productpal.models.data.DescriptionRepository;
+//import org.launchcode.productpal.models.data.DescriptionRepository;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.Product;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,8 +29,8 @@ public class HomeController {
 
     @Autowired
     private CategoryRepository categoryRepository;
-    @Autowired
-    private DescriptionRepository descriptionRepository;
+//    @Autowired
+//    private DescriptionRepository descriptionRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -54,11 +54,10 @@ public class HomeController {
             model.addAttribute(new Product());
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("categories", categoryRepository.findAll());
-            model.addAttribute("descriptions", descriptionRepository.findAll());
+//            model.addAttribute("descriptions", descriptionRepository.findAll());
             return "add";
         }
-        Description description = new Description(newProduct.getDescription().getName());
-        descriptionRepository.save(description);
+        String description = new String(newProduct.getDescription());
         newProduct.setDescription(description);
         productRepository.save(newProduct);
 //        Category category = new Category(newProduct.getCategory().getName());

@@ -5,7 +5,7 @@ import org.launchcode.productpal.models.Product;
 import org.launchcode.productpal.models.data.CategoryRepository;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.ProductData;
-import org.launchcode.productpal.models.data.DescriptionRepository;
+//import org.launchcode.productpal.models.data.DescriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -30,8 +30,8 @@ public class ListController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    @Autowired
-    private DescriptionRepository descriptionRepository;
+//    @Autowired
+//    private DescriptionRepository descriptionRepository;
 
     static HashMap<String, String> columnChoices = new HashMap<>();
 
@@ -46,7 +46,7 @@ public class ListController {
     @RequestMapping("")
     public String list(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-        model.addAttribute("descriptions", descriptionRepository.findAll());
+//        model.addAttribute("descriptions", descriptionRepository.findAll());
 
         return "list";
     }

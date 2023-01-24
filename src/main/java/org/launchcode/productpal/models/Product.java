@@ -8,15 +8,17 @@ import javassist.runtime.Desc;
 import org.launchcode.productpal.models.Category;
 
 @Entity
+@Table(name="product")
 public class Product extends AbstractEntity{
 
     @NotNull
     @Size(min=3, max=50)
     private String name;
     @ManyToOne
+    @JoinColumn(name="category_id", nullable = false)
     private Category category;
-    @ManyToOne
-    private Description description;
+
+    private String description;
 
     private Integer amount;
 //    @OneToOne
@@ -34,7 +36,7 @@ public class Product extends AbstractEntity{
     }
 
     // Initialize the id and value fields.
-    public Product(String aName, Category aCategory, Description aDescription, Integer anAmount) {
+    public Product(String aName, Category aCategory, String aDescription, Integer anAmount) {
         super();
         this.name = aName;
         this.category = aCategory;
@@ -60,11 +62,11 @@ public class Product extends AbstractEntity{
         this.category = category;
     }
 
-    public Description getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    public void setDescription(Description description) {
+    public void setDescription(String description) {
         this.description = description;
     }
 
