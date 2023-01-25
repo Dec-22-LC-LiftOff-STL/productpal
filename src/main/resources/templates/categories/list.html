@@ -21,8 +21,10 @@
         <tbody>
         <th:block th:each="category: ${listCategory}">
             <tr>
+<!--                [[${category.name}]]-->
                 <td>[[${category.id}]]</td>
-                <td>[[${category.name}]]</td>
+                <td><a th:href="@{'/list/' + ${category.id}}" th:text="${category.name}"></a></td>
+
 
                 <td>
                     <a  th:href="@{'/category/edit/'+ ${category.id}}">Edit</a>

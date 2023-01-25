@@ -50,6 +50,8 @@ public class HomeController {
     public String processAddProductForm(@ModelAttribute @Valid Product newProduct,Model model,
                                         Errors errors) {
 
+//        , @RequestParam int categoryId
+
         if (errors.hasErrors()) {
             model.addAttribute(new Product());
             model.addAttribute("products", productRepository.findAll());
@@ -57,20 +59,20 @@ public class HomeController {
 //            model.addAttribute("descriptions", descriptionRepository.findAll());
             return "add";
         }
-        String description = new String(newProduct.getDescription());
-        newProduct.setDescription(description);
-        productRepository.save(newProduct);
+
 //        Category category = new Category(newProduct.getCategory().getName());
 //        categoryRepository.save(category);
+//        newProduct.setCategory(category);
+//        Category category = categoryRepository.findById(categoryId).orElse(new Category());
 //        newProduct.setCategory(category);
         productRepository.save(newProduct);
         return "redirect:";
     }
 
-    @GetMapping("view/{name}")
-    public String displayViewProduct(Model model, @PathVariable String name) {
+    @GetMapping("view/{id}")
+    public String displayViewProduct(Model model, @PathVariable Integer id) {
 
-        Product product = productRepository.findFirstByName(name);
+        Optional<Product> product = productRepository.findById(id);
         if (product != null) {
             model.addAttribute("product", product);
             return "view";

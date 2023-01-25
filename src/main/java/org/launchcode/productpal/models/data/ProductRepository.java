@@ -14,4 +14,5 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     Iterable<Product> findAll();
     public Product findFirstByName (String name);
     Iterable<Category> findByCategoryName(String name);
+
 }
