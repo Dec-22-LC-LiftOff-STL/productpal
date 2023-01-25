@@ -17,13 +17,12 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
-
     @GetMapping("add")
     public String addCategory(Model model){
         model.addAttribute("category",new Category());
         model.addAttribute("pageTitle","Add category");
+        model.addAttribute("name","Add category");
         return "categories/add";
-
 
     }
     @GetMapping("list")
@@ -33,14 +32,12 @@ public class CategoryController {
 
         return "categories/list";
     }
-
     @PostMapping("add")
-    public String saveCategory(Category category, RedirectAttributes ra) {
+    public String saveCategory(Category category){
+        System.out.println(category);
         categoryService.save(category);
-        ra.addFlashAttribute("message", "Category added successfully");
-        return "redirect:list";
+        return "redirect:/categories/list";
     }
-
 
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
@@ -48,24 +45,21 @@ public class CategoryController {
             Category category=categoryService.get(id);
             model.addAttribute("category", category);
             model.addAttribute("pageTitle","Edit category");
-            return "categories/edit";
+            return "categories/add";
         } catch (UserNotFoundException e) {
             ra.addAttribute("message","category added successfully");
-            return "categories/list";
+            return "redirect:/categories/list";
         }
     }
-
-    @GetMapping("/list/{name}")
-    public String showName(@PathVariable("name")Integer id, Model model, RedirectAttributes ra){
+    @GetMapping("/delete/{id}")
+    public String deleteCategory(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
         try {
-            Category category=categoryService.get(id);
-            model.addAttribute("category", category);
-            model.addAttribute("pageTitle","Edit category");
-            return "categories/show";
+            categoryService.deleteCategory(id);
         } catch (UserNotFoundException e) {
             ra.addAttribute("message","category added successfully");
-            return "categories/list";
+
         }
+        return "redirect:/categories/list";
     }
 
     @PostMapping("/delete")
@@ -78,5 +72,4 @@ public class CategoryController {
         }
         return "redirect:/categories/list";
     }
-
 }

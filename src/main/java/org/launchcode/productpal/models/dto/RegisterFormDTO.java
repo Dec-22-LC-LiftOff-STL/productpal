@@ -12,7 +12,6 @@ public class RegisterFormDTO extends LoginFormDTO {
 
     @NotNull
     @NotBlank
-    @Length(min = 3, max = 20, message = "Invalid username. Must be between 3 and 30 characters.")
     private String email;
 
     public String getVerifyPassword() {
