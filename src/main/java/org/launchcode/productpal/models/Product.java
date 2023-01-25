@@ -17,7 +17,7 @@ public class Product extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
-    @NotNull
+//    @NotNull
     @Size(min=3, max=500)
     private String description;
 

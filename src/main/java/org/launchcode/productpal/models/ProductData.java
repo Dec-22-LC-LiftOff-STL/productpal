@@ -47,11 +47,11 @@ public class ProductData {
                     results.add(product);
                 }
             }
-            if (column.equals("description")) {
-                if (product.getDescription() != null && product.getDescription().toLowerCase().contains(value.toLowerCase())) {
-                    results.add(product);
-                }
-            }
+//            if (column.equals("description")) {
+//                if (product.getDescription() != null && product.getDescription().toLowerCase().contains(value.toLowerCase())) {
+//                    results.add(product);
+//                }
+//            }
         }
         return results;
     }
@@ -63,7 +63,7 @@ public class ProductData {
         } else if (fieldName.equals("category")){
             theValue = product.getCategory().getName();
         } else {
-            theValue = product.getDescription();
+            theValue = "";
         }
 
 
@@ -88,8 +88,8 @@ public class ProductData {
                 results.add(product);
             } else if (product.getCategory() != null && product.getCategory().getName().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getDescription() != null && product.getDescription().contains(lower_val)) {
-                results.add(product);
+//            } else if (product.getDescription() != null && product.getDescription().contains(lower_val)) {
+//                results.add(product);
             } else if (product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);
             } else if (product.getAmount() != null && Integer.parseInt(lower_val) == product.getAmount()) {
