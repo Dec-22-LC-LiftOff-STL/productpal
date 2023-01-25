@@ -10,7 +10,7 @@
 <table class="table-listing">
     <tr th:each="product : ${products}">
         <td>
-                <p th:text="${'Product Id: ' + product.id}"></p>
+            <p th:text="${'Product Id: ' + product.id}"></p>
             <p>
                 Name:
                 <a th:href="@{'/view/' + ${product.name}}" th:text="${product.name}"></a>

@@ -17,8 +17,10 @@ public class Product extends AbstractEntity{
     @ManyToOne
     @JoinColumn(name="category_id", nullable = false)
     private Category category;
-
+    @NotNull
+    @Size(min=3, max=500)
     private String description;
+
 
     private Integer amount;
     @OneToOne
@@ -43,6 +45,9 @@ public class Product extends AbstractEntity{
         this.description = aDescription;
         this.amount = anAmount;
     }
+//
+//    Category category = new Category();
+//    category.save();
 
     // Getters and setters.
 

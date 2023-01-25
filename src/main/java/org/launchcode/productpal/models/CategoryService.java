@@ -29,18 +29,18 @@ public class CategoryService {
         throw new UserNotFoundException("Could not found user by ID");
     }
 
-    public Category getByName(String name) throws UserNotFoundException {
-        ArrayList<Category> result = categoryRepository.findByName(name);
-        if(result.size()>0){
-            return result.get(0);
-        }
-        throw new UserNotFoundException("Could not found user by NAME");
-    }
+//    public Category getById(Integer id) throws UserNotFoundException {
+//        Optional<Category> result = categoryRepository.findById(id);
+//        if(result.ifPresent()){
+//            return result.get(0);
+//        }
+//        throw new UserNotFoundException("Could not found user by NAME");
+//    }
 
     public void deleteCategory(Integer id) throws UserNotFoundException {
 
         Long count=categoryRepository.countById(id);
-        if(count == null|| count == 0){
+        if( count == 0){
             throw new UserNotFoundException("Could not found user by ID");
         }
         categoryRepository.deleteById(id);

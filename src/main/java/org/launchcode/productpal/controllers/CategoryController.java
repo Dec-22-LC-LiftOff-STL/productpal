@@ -56,9 +56,9 @@ public class CategoryController {
     }
 
     @GetMapping("/list/{name}")
-    public String showName(@PathVariable("name")String name, Model model, RedirectAttributes ra){
+    public String showName(@PathVariable("name")Integer id, Model model, RedirectAttributes ra){
         try {
-            Category category=categoryService.getByName(name);
+            Category category=categoryService.get(id);
             model.addAttribute("category", category);
             model.addAttribute("pageTitle","Edit category");
             return "categories/show";

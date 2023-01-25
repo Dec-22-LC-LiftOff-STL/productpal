@@ -3,6 +3,7 @@ package org.launchcode.productpal.models;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,7 +15,10 @@ public class Category extends AbstractEntity{
     private String name;
 
     @OneToMany
-    private List<Product> products;
+    private List<Product> products = new ArrayList<>();
+
+    //    private Product product;
+
 
     public Category() {
     }
