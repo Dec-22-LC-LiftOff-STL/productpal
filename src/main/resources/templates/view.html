@@ -5,7 +5,7 @@
 <body class="container  body-content">
 
 <nav th:replace="fragments :: page-header"></nav>
-<h1 th:text="${'Product: ' + product.name}">Default Title</h1>
+<h1 th:text="${#strings.capitalizeWords(title)}"></h1>
 
 <div class="product-listing">
     <p th:text="${'ID: ' + product.id}"></p>

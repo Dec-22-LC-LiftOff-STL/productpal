@@ -24,34 +24,37 @@ public class ProductData {
     public static ArrayList<Product> findByColumnAndValue(String column, String value, Iterable<Product> allProducts) {
 
         ArrayList<Product> results = new ArrayList<>();
+        try {
+            if (value.toLowerCase().equals("all")) {
+                return (ArrayList<Product>) allProducts;
+            }
 
-        if (value.toLowerCase().equals("all")){
-            return (ArrayList<Product>) allProducts;
-        }
-
-        if (column.equals("all")){
-            results = findByValue(value, allProducts);
-            return results;
-        }
-        for (Product product : allProducts) {
             if (column.equals("all")) {
-                results.add(product);
+                results = findByValue(value, allProducts);
+                return results;
             }
-            if (column.equals("name")) {
-                if (product.getName().toLowerCase().contains(value.toLowerCase())) {
+            for (Product product : allProducts) {
+                if (column.equals("all")) {
                     results.add(product);
                 }
-            }
-            if (column.equals("category")) {
-                if (product.getCategory() != null && product.getCategory().getName().toLowerCase().contains(value.toLowerCase())) {
-                    results.add(product);
+                if (column.equals("name")) {
+                    if (product.getName().toLowerCase().contains(value.toLowerCase())) {
+                        results.add(product);
+                    }
+                }
+                if (column.equals("category")) {
+                    if (product.getCategory() != null && product.getCategory().getName().toLowerCase().contains(value.toLowerCase())) {
+                        results.add(product);
+                    }
+                }
+                if (column.equals("description")) {
+                    if (product.getDescription() != null && product.getDescription().toLowerCase().contains(value.toLowerCase())) {
+                        results.add(product);
+                    }
                 }
             }
-//            if (column.equals("description")) {
-//                if (product.getDescription() != null && product.getDescription().toLowerCase().contains(value.toLowerCase())) {
-//                    results.add(product);
-//                }
-//            }
+        } catch (Exception e) {
+
         }
         return results;
     }
@@ -63,7 +66,7 @@ public class ProductData {
         } else if (fieldName.equals("category")){
             theValue = product.getCategory().getName();
         } else {
-            theValue = "";
+            theValue = product.getDescription();
         }
 
 
@@ -78,6 +81,7 @@ public class ProductData {
      * @return      List of all jobs with at least one field containing the value.
      */
     public static ArrayList<Product> findByValue(String value, Iterable<Product> allProducts) {
+
         String lower_val = value.toLowerCase();
 
         ArrayList<Product> results = new ArrayList<>();
@@ -88,8 +92,8 @@ public class ProductData {
                 results.add(product);
             } else if (product.getCategory() != null && product.getCategory().getName().contains(lower_val)) {
                 results.add(product);
-//            } else if (product.getDescription() != null && product.getDescription().contains(lower_val)) {
-//                results.add(product);
+            } else if (product.getDescription() != null && product.getDescription().contains(lower_val)) {
+                results.add(product);
             } else if (product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);
             } else if (product.getAmount() != null && Integer.parseInt(lower_val) == product.getAmount()) {

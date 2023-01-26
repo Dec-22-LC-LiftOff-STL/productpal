@@ -13,7 +13,7 @@
             <p th:text="${'Product Id: ' + product.id}"></p>
             <p>
                 Name:
-                <a th:href="@{'/view/' + ${product.name}}" th:text="${product.name}"></a>
+                <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
             </p>
             <p>
                 Category:

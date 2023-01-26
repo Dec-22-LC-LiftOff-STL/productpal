@@ -74,7 +74,8 @@ public class HomeController {
 
         Optional<Product> product = productRepository.findById(id);
         if (product != null) {
-            model.addAttribute("product", product);
+            model.addAttribute("title", "Product: "+ product.get().getName());
+            model.addAttribute("product", product.get());
             return "view";
         } else {
             return "redirect:/";

@@ -67,7 +67,7 @@ public class ThresholdsController {
 
             if (optProduct.isPresent()) {
                 Product productToSave = optProduct.get();
-                productToSave.setName(product.getName());
+                productToSave.setName(optProduct.get().getName());
                 productToSave.setCategory(product.getCategory());
                 productToSave.setAmount(product.getAmount());
 //                newProductThresholds.setProduct(product);

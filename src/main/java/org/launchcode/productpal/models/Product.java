@@ -11,7 +11,6 @@ import org.launchcode.productpal.models.Category;
 @Table(name="product")
 public class Product extends AbstractEntity{
 
-    @NotBlank
     @Size(min=3, max=50)
     private String name;
     @ManyToOne
