@@ -5,8 +5,13 @@
 <body class="container body-content">
 
 <div th:replace="fragments :: page-header"></div>
-<h1 th:text="${category.id}"></h1>
-<p th:text="${category.name}"></p>
-<a th:href="@{/categories/list}">Back to List</a>
+<h1 th:text="${'Category Name: ' + category.name}"></h1>
+<p th:text="${'Category ID: ' + category.id}"></p>
+<a th:href="@{/categories/list}">List All Categories</a>
+<br>
+<a th:href="@{/}">Back to Home</a>
+
 </body>
 </html>
+
+

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
+import java.util.Optional;
 
 @Repository
 @Transactional
@@ -15,4 +16,5 @@ public interface ProductRepository extends CrudRepository<Product, Integer> {
     public Product findFirstByName (String name);
     Iterable<Category> findByCategoryName(String name);
 
+    Optional<Category> findByCategoryId(Integer id);
 }

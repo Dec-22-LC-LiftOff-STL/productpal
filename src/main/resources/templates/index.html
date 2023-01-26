@@ -17,7 +17,7 @@
             </p>
             <p>
                 Category:
-                <a th:href="@{'/categories/list/' + ${product.category}}" th:text="${product.category}"></a>
+                <a th:href="@{'/categories/show/' + ${product.category.id}}" th:text="${product.category}"></a>
             </p>
             <p th:text="${'Description: ' + product.description}">
             </p>

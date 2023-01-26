@@ -45,4 +45,8 @@ public class CategoryService {
         }
         categoryRepository.deleteById(id);
     }
+
+    public Optional<Category> findByCategoryId(Integer id) {
+        return categoryRepository.findById(id);
+    }
 }

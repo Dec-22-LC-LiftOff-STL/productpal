@@ -2,7 +2,10 @@ package org.launchcode.productpal.controllers;
 
 import org.launchcode.productpal.models.Category;
 import org.launchcode.productpal.models.CategoryService;
+import org.launchcode.productpal.models.Product;
 import org.launchcode.productpal.models.UserNotFoundException;
+import org.launchcode.productpal.models.data.CategoryRepository;
+import org.launchcode.productpal.models.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("categories")
@@ -17,6 +21,11 @@ import java.util.List;
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private CategoryRepository categoryRepository;
+    @Autowired
+    private ProductRepository productRepository;
+
     @GetMapping("add")
     public String addCategory(Model model){
         model.addAttribute("category",new Category());
@@ -71,5 +80,18 @@ public class CategoryController {
             ra.addFlashAttribute("message", e.getMessage());
         }
         return "redirect:/categories/list";
+    }
+
+    @GetMapping("show/{id}")
+    public String displayViewProduct(Model model, @PathVariable Integer id) {
+
+        Optional<Category> category = categoryService.findByCategoryId(id);
+        if (category != null) {
+            model.addAttribute("title", "Category: "+ category.get().getName());
+            model.addAttribute("category", category.get());
+            return "categories/show";
+        } else {
+            return "redirect:/";
+        }
     }
 }

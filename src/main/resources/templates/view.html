@@ -11,7 +11,8 @@
     <p th:text="${'ID: ' + product.id}"></p>
     <p th:text="${'Name: ' + product.name}"></p>
     <p>
-        Category: <a th:href="@{'/categories/list/' + ${product.category}}" th:text="${product.category}"></a>
+        Category:
+        <a th:href="@{'/categories/show/' + ${product.category.id}}" th:text="${product.category}"></a>
     </p>
     <p th:text="${'Description: ' + product.description}"></p>
 </div>
