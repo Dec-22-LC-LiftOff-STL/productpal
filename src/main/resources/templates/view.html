@@ -13,13 +13,7 @@
     <p>
         Category: <a th:href="@{'/categories/list/' + ${product.category}}" th:text="${product.category}"></a>
     </p>
-    <p> Description:
-    <ul>
-        <li th:each="description : ${descriptions}">
-            <a th:href="@{'/description/view/' + ${product.description}}" th:text="${product.description}"></a>
-        </li>
-    </ul>
-    </p>
+    <p th:text="${'Description: ' + product.description}"></p>
 </div>
 
 </body>
