@@ -16,7 +16,7 @@
 
     <div class="form-group">
         <label th:for="category">Categories</label>
-        <select name="categoryId">
+        <select name="category_id">
             <option th:each="category : ${categories}"
                     th:text="${category.name}"
                     th:value="${category.id}"></option>

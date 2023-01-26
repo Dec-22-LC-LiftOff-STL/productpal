@@ -48,23 +48,19 @@ public class HomeController {
 
     @PostMapping("add")
     public String processAddProductForm(@ModelAttribute @Valid Product newProduct,Model model,
-                                        Errors errors) {
-
-//        , @RequestParam int categoryId
+                                        Errors errors, @RequestParam int category_id) {
 
         if (errors.hasErrors()) {
             model.addAttribute(new Product());
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("categories", categoryRepository.findAll());
-//            model.addAttribute("descriptions", descriptionRepository.findAll());
             return "add";
         }
+        Optional<Category> category = categoryRepository.findById(category_id);
+        if (category.isPresent()) {
+            newProduct.setCategory(category.get());
+        }
 
-//        Category category = new Category(newProduct.getCategory().getName());
-//        categoryRepository.save(category);
-//        newProduct.setCategory(category);
-//        Category category = categoryRepository.findById(categoryId).orElse(new Category());
-//        newProduct.setCategory(category);
         productRepository.save(newProduct);
         return "redirect:";
     }

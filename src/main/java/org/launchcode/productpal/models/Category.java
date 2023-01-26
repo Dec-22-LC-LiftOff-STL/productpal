@@ -17,9 +17,6 @@ public class Category extends AbstractEntity{
     @OneToMany
     private List<Product> products = new ArrayList<>();
 
-    //    private Product product;
-
-
     public Category() {
     }
 
