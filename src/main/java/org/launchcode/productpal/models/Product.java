@@ -1,7 +1,7 @@
 package org.launchcode.productpal.models;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import javassist.runtime.Desc;
@@ -11,7 +11,7 @@ import org.launchcode.productpal.models.Category;
 @Table(name="product")
 public class Product extends AbstractEntity{
 
-    @NotNull
+    @NotBlank
     @Size(min=3, max=50)
     private String name;
     @ManyToOne
@@ -23,8 +23,8 @@ public class Product extends AbstractEntity{
 
 
     private Integer amount;
-    @OneToOne
-    private Thresholds thresholds;
+//    @OneToOne
+//    private Thresholds thresholds;
 
     private int lowThreshold;
 
@@ -83,13 +83,13 @@ public class Product extends AbstractEntity{
         this.amount = amount;
     }
 
-    public Thresholds getThresholds() {
-        return thresholds;
-    }
-
-    public void setThresholds(Thresholds thresholds) {
-        this.thresholds = thresholds;
-    }
+//    public Thresholds getThresholds() {
+//        return thresholds;
+//    }
+//
+//    public void setThresholds(Thresholds thresholds) {
+//        this.thresholds = thresholds;
+//    }
 
     public int getLowThreshold() {
         return lowThreshold;
