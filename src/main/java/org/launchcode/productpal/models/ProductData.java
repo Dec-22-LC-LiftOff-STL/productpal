@@ -98,12 +98,8 @@ public class ProductData {
                 results.add(product);
             } else if (product.getAmount() != null && Integer.parseInt(lower_val) == product.getAmount()) {
                 results.add(product);
-//            }else if (product.getThresholds() != null && Integer.parseInt(lower_val) == product.getThresholds().getId()){
-//                results.add(product);
             }
         }
-
-
         return results;
     }
 

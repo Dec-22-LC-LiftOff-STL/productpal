@@ -9,9 +9,11 @@ import org.launchcode.productpal.models.data.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Optional;
 
@@ -49,17 +51,35 @@ public class CategoryController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
+    public String showEditForm(@PathVariable("id")Integer id, @ModelAttribute("category") Category category, Model model, RedirectAttributes ra){
         try {
-            Category category=categoryService.get(id);
+            category = categoryRepository.findById(id)
+                    .orElseThrow(() -> new UserNotFoundException("Category not found with id: " + id));
             model.addAttribute("category", category);
             model.addAttribute("pageTitle","Edit category");
-            return "categories/add";
+            return "categories/edit";
         } catch (UserNotFoundException e) {
             ra.addAttribute("message","category added successfully");
             return "redirect:/categories/list";
         }
     }
+
+
+
+    @PostMapping("/edit/{id}")
+    public String updateCategory(@PathVariable("id") Integer id, @ModelAttribute("category") @Valid Category category, BindingResult bindingResult, RedirectAttributes ra) throws UserNotFoundException {
+        if(bindingResult.hasErrors()){
+            return "categories/edit";
+        }
+        Category existingCategory = categoryRepository.findById(id)
+                .orElseThrow(() -> new UserNotFoundException("Category not found with id: " + id));
+        existingCategory.setName(category.getName());
+        categoryRepository.saveAndFlush(existingCategory);
+        ra.addFlashAttribute("message", "Category updated successfully");
+        return "redirect:/categories/list";
+    }
+
+
     @GetMapping("/delete/{id}")
     public String deleteCategory(@PathVariable("id")Integer id, Model model, RedirectAttributes ra){
         try {

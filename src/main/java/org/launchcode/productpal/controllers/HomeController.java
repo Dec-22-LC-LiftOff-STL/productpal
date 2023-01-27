@@ -29,8 +29,6 @@ public class HomeController {
 
     @Autowired
     private CategoryRepository categoryRepository;
-//    @Autowired
-//    private DescriptionRepository descriptionRepository;
 
     @RequestMapping("")
     public String index(Model model) {
@@ -77,6 +75,4 @@ public class HomeController {
             return "redirect:/";
         }
     }
-
-
 }

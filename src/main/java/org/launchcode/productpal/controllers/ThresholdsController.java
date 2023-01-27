@@ -25,15 +25,6 @@ public class ThresholdsController {
     @Autowired
     private ProductRepository productRepository;
 
-//    @GetMapping("")
-//    public String index (Model model){
-//        model.addAttribute("title", "All Product Thresholds");
-//        model.addAttribute("products", productRepository.findAll());
-//        return "categories/index";
-//    }
-
-
-
     @GetMapping("add")
     public String displayAddThresholdsForm(Model model){
         try {
@@ -41,8 +32,6 @@ public class ThresholdsController {
 
 
             model.addAttribute("title", "Update Product Inventory");
-//            ProductThresholdsDTO newProductThresholds = new ProductThresholdsDTO();
-//            model.addAttribute("newProductThresholds", newProductThresholds);
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("product", new Product());
         } catch (Exception e) {
@@ -70,25 +59,10 @@ public class ThresholdsController {
                 productToSave.setName(optProduct.get().getName());
                 productToSave.setCategory(product.getCategory());
                 productToSave.setAmount(product.getAmount());
-//                newProductThresholds.setProduct(product);
                 productToSave.setLowThreshold(product.getLowThreshold());
                 productToSave.setHighThreshold(product.getHighThreshold());
                 productRepository.save(productToSave);
 
-//                if (product.getThresholds() == null) {
-//                    Thresholds thresholds = new Thresholds(product,
-//                            newProductThresholds.getThresholds().getLowThreshold(),
-//                            newProductThresholds.getThresholds().getHighThreshold());
-//                    newProductThresholds.setThresholds(thresholds);
-//                    thresholdsRepository.save(thresholds);
-//                } else {
-//                    Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-//                    Thresholds thresholds = optThresholds.get();
-//                    thresholds.setLowThreshold(newProductThresholds.getThresholds().getLowThreshold());
-//                    thresholds.setHighThreshold(newProductThresholds.getThresholds().getHighThreshold());
-//                    newProductThresholds.setThresholds(thresholds);
-//                    thresholdsRepository.save(thresholds);
-//                }
             } else {
 //                window.log("Product must be selected!");
             }
@@ -107,17 +81,11 @@ public class ThresholdsController {
                 model.addAttribute("title", "Product Threshold for Product ID: " +productID);
                 Optional<Product> optProduct = productRepository.findById(productID);
                 model.addAttribute( "product", optProduct.get());
-//                Optional<Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-//                model.addAttribute("thresholds", optThresholds.get());
                 return "thresholds/view";
             }
 
-//            ProductThresholdsDTO productThresholdDTO = new ProductThresholdsDTO();
             Optional<Product> optProduct = productRepository.findById(productID);
             if (optProduct.isPresent()) {
-//                productThresholdDTO.setProduct(optProduct.get());
-//                Optional <Thresholds> optThresholds = thresholdsRepository.findById(optProduct.get().getThresholds().getId());
-//                productThresholdDTO.setThresholds(optThresholds.get());
                 model.addAttribute("product", optProduct.get());
             }
         } catch (Exception e) {

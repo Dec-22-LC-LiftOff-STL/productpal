@@ -30,23 +30,17 @@ public class ListController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-//    @Autowired
-//    private DescriptionRepository descriptionRepository;
-
     static HashMap<String, String> columnChoices = new HashMap<>();
 
     public ListController () {
-
         columnChoices.put("all", "All");
         columnChoices.put("category", "Category");
         columnChoices.put("description", "Description");
-
     }
 
     @RequestMapping("")
     public String list(Model model) {
         model.addAttribute("categories", categoryRepository.findAll());
-//        model.addAttribute("descriptions", descriptionRepository.findAll());
 
         return "list";
     }

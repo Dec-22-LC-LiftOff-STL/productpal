@@ -13,7 +13,6 @@
             <th>ID</th>
             <th>Name</th>
             <th>Description</th>
-<!--            <th>Action</th>-->
 
         </tr>
         </thead>
@@ -21,8 +20,7 @@
         <tbody>
         <th:block th:each="category: ${listCategory}">
             <tr>
-<!--                [[${category.name}]]-->
-                <td>[[${category.id}]]</td>
+                <td th:text="${category.id}"></td>
                 <td><a th:href="@{'/list/' + ${category.id}}" th:text="${category.name}"></a></td>
 
 

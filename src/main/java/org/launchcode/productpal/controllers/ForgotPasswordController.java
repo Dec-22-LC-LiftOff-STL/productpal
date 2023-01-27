@@ -40,7 +40,6 @@ public class ForgotPasswordController {
 
     private static final Logger log = LoggerFactory.getLogger(ForgotPasswordController.class);
 
-
     @GetMapping("/forgot_password")
     public String showForgotPasswordForm() {
         return "forgot_password_form";
@@ -65,7 +64,6 @@ public class ForgotPasswordController {
         } catch (UnsupportedEncodingException | MessagingException e) {
             model.addAttribute("error", "Error while sending email");
         }
-
         return "forgot_password_form";
     }
 
@@ -99,7 +97,6 @@ public class ForgotPasswordController {
             model.addAttribute("message", "Invalid Token");
             return "message";
         }
-
         return "reset_password_form";
     }
 
@@ -107,8 +104,6 @@ public class ForgotPasswordController {
     @PostMapping("/reset_password")
     public String processResetPassword(@Param(value="token") String token, @Param(value="password") String password, HttpServletRequest request, Model model) throws MessagingException, UnsupportedEncodingException, UserNotFoundException {
         log.info("Received request to reset password");
-//        String token = request.getParameter("token");
-//        String password = request.getParameter("password");
         if(password == null || password.isEmpty()){
             model.addAttribute("message", "password can't be null or empty.");
             return "message";
@@ -127,10 +122,6 @@ public class ForgotPasswordController {
             log.info("Changed password for user with email: {}", user.getEmail());
             model.addAttribute("message", "You have successfully changed your password.");
         }
-
         return "message";
     }
-
-
-
 }

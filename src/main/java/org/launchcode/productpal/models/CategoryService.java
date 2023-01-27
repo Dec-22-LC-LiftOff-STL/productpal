@@ -29,13 +29,6 @@ public class CategoryService {
         throw new UserNotFoundException("Could not found user by ID");
     }
 
-//    public Category getById(Integer id) throws UserNotFoundException {
-//        Optional<Category> result = categoryRepository.findById(id);
-//        if(result.ifPresent()){
-//            return result.get(0);
-//        }
-//        throw new UserNotFoundException("Could not found user by NAME");
-//    }
 
     public void deleteCategory(Integer id) throws UserNotFoundException {
 
@@ -48,5 +41,9 @@ public class CategoryService {
 
     public Optional<Category> findByCategoryId(Integer id) {
         return categoryRepository.findById(id);
+    }
+
+    public void update(Category category){
+        categoryRepository.save(category);
     }
 }
