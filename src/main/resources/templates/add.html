@@ -36,6 +36,18 @@
         <output>0</output>
     </div>
 
+    <div class="form-group">
+        <label th:for="product">High Threshold</label>
+        <input type="range" class="form-control" th:field="${product.lowThreshold}" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+        <output>0</output>
+    </div>
+
+    <div class="form-group">
+        <label th:for="product">Low Threshold</label>
+        <input type="range" class="form-control" th:field="${product.highThreshold}" value="0" min="0" max="100" oninput="this.nextElementSibling.value = this.value">
+        <output>0</output>
+    </div>
+
     <input type="submit" value="Add Product" />
 </form>
 

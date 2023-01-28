@@ -15,6 +15,9 @@
         <a th:href="@{'/categories/show/' + ${product.category.id}}" th:text="${product.category}"></a>
     </p>
     <p th:text="${'Description: ' + product.description}"></p>
+    <p th:text="${'Amount: ' + product.amount}"></p>
+    <p th:text="${'Low Threshold: ' + product.lowThreshold}"></p>
+    <p th:text="${'High Threshold: ' + product.highThreshold}"></p>
 </div>
 
 </body>
