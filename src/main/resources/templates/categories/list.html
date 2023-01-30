@@ -21,7 +21,9 @@
         <th:block th:each="category: ${listCategory}">
             <tr>
                 <td th:text="${category.id}"></td>
-                <td><a th:href="@{'/list/' + ${category.id}}" th:text="${category.name}"></a></td>
+                <td><a th:href="@{'/categories/show/' + ${category.id}}" th:text="${category.name}"></a></td>
+<!--                <a th:href="@{'/categories/show/' + ${product.category.id}}" th:text="${product.category}"></a>-->
+
 
 
                 <td>
