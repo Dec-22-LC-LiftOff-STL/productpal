@@ -4,33 +4,33 @@
 </head>
 <body class="container body-content">    <meta charset="UTF-8">
 <div align="center">
-    <title>List Category</title>
+    <title>List Products By Category</title>
     <nav th:replace="fragments :: page-header"></nav>
-    <h1> List Category </h1>
+    <h1> List Products By Category </h1>
     <br/>
     <table border="1" cellpadding="10">
         <thead class="">
         <tr>
             <th>Category Name</th>
             <th>Products</th>
-
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
         <tbody>
         <th:block th:each="category: ${categories}">
             <tr>
-                <td th:text="${category.name}"></td>
-
+                <td>
+                    <a th:href="@{'/categories/show/' +${category.id}}" th:text="${category.name}"></a>
+                </td>
                 <td>
                     <th:block th:if="${not category.products.empty}">
                         <ul>
-                            <li th:each="product : ${category.products}" th:text="${product.name}"></li>
-
+                            <li th:each="product : ${category.products}">
+                                <a th:href="@{'/view/' + ${product.id}}" th:text="${product.name}"></a>
+                            </li>
                         </ul>
                     </th:block>
                 </td>
-
             </tr>
         </th:block>
         </tbody>
