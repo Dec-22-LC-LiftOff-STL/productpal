@@ -10,20 +10,18 @@
     <table border="1" cellpadding="10">
         <thead class="">
         <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Description</th>
-
+            <th>Category Name</th>
+            <th>Action</th>
         </tr>
         </thead>
         <div th:if="${message}" th:text="${message}"></div>
+
+
         <tbody>
         <th:block th:each="category: ${listCategory}">
             <tr>
-                <td th:text="${category.id}"></td>
-                <td><a th:href="@{'/categories/show/' + ${category.id}}" th:text="${category.name}"></a></td>
-<!--                <a th:href="@{'/categories/show/' + ${product.category.id}}" th:text="${product.category}"></a>-->
 
+                <td><a th:href="@{'/categories/show/' + ${category.id}}" th:text="${category.name}"></a></td>
 
 
                 <td>
@@ -40,6 +38,8 @@
     </table>
 
 </div>
+
+
 
 </body>
 </html>

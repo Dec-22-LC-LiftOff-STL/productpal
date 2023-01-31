@@ -3,6 +3,7 @@ package org.launchcode.productpal.controllers;
 import org.launchcode.productpal.models.Category;
 import org.launchcode.productpal.models.CategoryService;
 //import org.launchcode.productpal.models.Description;
+import org.launchcode.productpal.models.ProductData;
 import org.launchcode.productpal.models.data.CategoryRepository;
 //import org.launchcode.productpal.models.data.DescriptionRepository;
 import org.launchcode.productpal.models.data.ProductRepository;
@@ -16,7 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * Created by LaunchCode
@@ -52,6 +56,7 @@ public class HomeController {
             model.addAttribute(new Product());
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("categories", categoryRepository.findAll());
+
             return "add";
         }
         Optional<Category> category = categoryRepository.findById(category_id);
@@ -75,4 +80,15 @@ public class HomeController {
             return "redirect:/";
         }
     }
+
+
+    @GetMapping("list_category")
+    public String displayProductByCategory(Model model) {
+        model.addAttribute(new Product());
+        model.addAttribute("products", productRepository.findAll());
+        model.addAttribute("categories", categoryRepository.findAll());
+        List<Category> categories = categoryRepository.findAll();
+        return "list_category";
+    }
+
 }
