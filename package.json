@@ -1,5 +1,8 @@
 {
   "dependencies": {
     "jquery": "^3.6.3"
+  },
+  "scripts": {
+    "preinstall": "node preinstall.js"
   }
 }
