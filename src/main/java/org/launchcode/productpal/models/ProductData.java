@@ -87,16 +87,31 @@ public class ProductData {
         ArrayList<Product> results = new ArrayList<>();
 
         for (Product product : allProducts) {
+            boolean matchFound = false;
+            try {
+                int number = Integer.parseInt(lower_val);
+                if (product.getAmount() != null && product.getAmount() == number) {
+                    matchFound = true;
+                }
+                else if (product.getAmount() != null && (Integer.toString(product.getAmount()).contains(lower_val) || Integer.parseInt(lower_val) == product.getAmount())) {
+                    results.add(product);
+                } else if ((Integer.toString(product.getHighThreshold()).contains(lower_val) || Integer.parseInt(lower_val) == product.getHighThreshold())) {
+                    results.add(product);
+                } else if ((Integer.toString(product.getLowThreshold()).contains(lower_val) || Integer.parseInt(lower_val) == product.getLowThreshold())) {
+                    results.add(product);
+                }
 
-            if (product.getName().toLowerCase().contains(lower_val)) {
+            } catch (NumberFormatException e) {
+                // Search value is not an integer, do nothing
+            }
+
+            if (!matchFound && product.getName().toLowerCase().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getCategory() != null && product.getCategory().getName().contains(lower_val)) {
+            } else if (!matchFound && product.getCategory() != null && product.getCategory().getName().contains(lower_val)) {
                 results.add(product);
-            } else if (product.getDescription() != null && product.getDescription().contains(lower_val)) {
+            } else if (!matchFound && product.getDescription() != null && product.getDescription().contains(lower_val)) {
                 results.add(product);
-            } else if (product.toString().toLowerCase().contains(lower_val)) {
-                results.add(product);
-            } else if (product.getAmount() != null && Integer.parseInt(lower_val) == product.getAmount()) {
+            } else if (!matchFound && product.toString().toLowerCase().contains(lower_val)) {
                 results.add(product);
             }
         }

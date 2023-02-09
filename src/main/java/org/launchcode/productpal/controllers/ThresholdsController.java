@@ -1,10 +1,8 @@
 package org.launchcode.productpal.controllers;
 
 import org.launchcode.productpal.models.Product;
-import org.launchcode.productpal.models.Thresholds;
 import org.launchcode.productpal.models.data.ProductRepository;
 import org.launchcode.productpal.models.data.ThresholdsRepository;
-import org.launchcode.productpal.models.dto.ProductThresholdsDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,8 +27,6 @@ public class ThresholdsController {
     public String displayAddThresholdsForm(Model model){
         try {
             Iterable<Product> products = productRepository.findAll();
-
-
             model.addAttribute("title", "Update Product Inventory");
             model.addAttribute("products", productRepository.findAll());
             model.addAttribute("product", new Product());
@@ -41,36 +37,22 @@ public class ThresholdsController {
     }
 
     @PostMapping("add")
-    public String processAddThresholds(@ModelAttribute @Valid Product product,
-                                       Model model, Errors errors){
-        if (errors.hasErrors()) {
-            model.addAttribute("title", "Update Product Inventory");
+    public String processAddThresholdsForm(@ModelAttribute @Valid Product product, Errors errors, Model model){
+        if(errors.hasErrors()){
+            model.addAttribute("title", "Add Thresholds");
             model.addAttribute("products", productRepository.findAll());
-            model.addAttribute( "product", product);
             return "thresholds/add";
         }
 
-        try {
-            Iterable<Product> products = productRepository.findAll();
-            Optional<Product> optProduct = productRepository.findById(product.getId());
+        Optional<Product> originalProduct = productRepository.findById(product.getId());
 
-            if (optProduct.isPresent()) {
-                Product productToSave = optProduct.get();
-                productToSave.setName(optProduct.get().getName());
-                productToSave.setCategory(product.getCategory());
-                productToSave.setAmount(product.getAmount());
-                productToSave.setLowThreshold(product.getLowThreshold());
-                productToSave.setHighThreshold(product.getHighThreshold());
-                productRepository.save(productToSave);
-
-            } else {
-//                window.log("Product must be selected!");
-            }
-        }catch (Exception e){
-            e.printStackTrace();
+        if(originalProduct.isPresent()){
+            originalProduct.get().setAmount(product.getAmount());
+            originalProduct.get().setLowThreshold(product.getLowThreshold());
+            originalProduct.get().setHighThreshold(product.getHighThreshold());
+            productRepository.save(originalProduct.get());
         }
-
-        return "redirect:/";
+        return "redirect:../";
     }
 
     @GetMapping("view/{productID}")
